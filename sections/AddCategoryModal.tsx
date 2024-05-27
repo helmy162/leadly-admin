@@ -1,14 +1,6 @@
 import CloseIcon from "@/components/icons/CloseIcon";
 import Modal from "@/components/Modal";
-import MultiSelectInput from "@/components/MultiSelectInput";
 import TextInput from "@/components/TextInput";
-import SelectInput from "@/components/SelectInput";
-import { Option } from "@/lib/types";
-import { useState } from "react";
-import { ALL_CATEGORIES } from "@/mockups/categories";
-import ImagesUpload from "@/components/ImagesUpload";
-import ClockIcon from "@/components/icons/ClockIcon";
-import AccountIcon from "@/components/icons/AccountIcon";
 
 export default function AddCategoryModal({
   open,
@@ -17,17 +9,13 @@ export default function AddCategoryModal({
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
-  const [categories, setCategories] = useState<Option[]>([]);
-  const [hasDefinedPractitioner, setHasDefinedPractitioner] = useState(true);
-  const [practitioners, setPractitioners] = useState<Option[]>([]);
-  const [step, setStep] = useState(1);
 
   const handleAddCategory = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
     let data: any = Object.fromEntries(formData.entries());
 
-    console.log("Service data:", data); // handle the data here
+    console.log("Category data:", data); // handle the data here
 
     setOpen(false); // close the modal
   };

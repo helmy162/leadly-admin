@@ -1,6 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
-import useMediaQuery from "@/lib/useMediaQuery";
 
 export default function Modal({
   children,

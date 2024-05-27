@@ -18,7 +18,7 @@ export default function AddEmployeeModal({
     const formData = new FormData(e.target as HTMLFormElement);
     let data: any = Object.fromEntries(formData.entries());
 
-    console.log("Service data:", data); // handle the data here
+    console.log("Employee data:", data); // handle the data here
 
     setOpen(false); // close the modal
   };

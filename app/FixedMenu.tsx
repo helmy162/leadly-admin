@@ -1,4 +1,4 @@
-import MenuItem from "@/components/MenuItem";
+import FixedMenuItem from "@/components/FixedMenuItem";
 import AccountIcon from "@/components/icons/AccountIcon";
 import CalendarIcon from "@/components/icons/CalendarIcon";
 import DashboardIcon from "@/components/icons/DashboardIcon";
@@ -10,7 +10,7 @@ export default function FixedMenu() {
     <div className="fixed inset-x-0 bottom-6 mx-auto w-full max-w-[430px] px-4">
       <div className=" mx-auto flex min-h-12 w-full items-center justify-between rounded-xl bg-primary px-7 py-2 text-white">
         {menu.map((item, index) => (
-          <MenuItem key={index} {...item} />
+          <FixedMenuItem key={index} {...item} />
         ))}
       </div>
       <div className="fixed inset-x-0 bottom-0 -z-10 mx-auto h-[72px] w-full  max-w-[430px] bg-white/30 backdrop-blur-sm" />
