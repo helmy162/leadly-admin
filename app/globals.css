@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/*scrollbar*/
+.fancy-scroll::-webkit-scrollbar {
+  height: 8px;
+}
+.fancy-scroll::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 0px rgba(0, 0, 0, 0);
+  @apply bg-black;
+  border-radius: 20px;
+}
+
+.fancy-scroll::-webkit-scrollbar-thumb {
+  height: 8px;
+  border-radius: 20px;
+  @apply bg-primary;
+}
+
+.fancy-scroll::-webkit-scrollbar-thumb:hover:hover {
+  @apply bg-darkGray;
+}
+
+/* hide the scrollbar on touch screens (mobile or tablet) */
+@media (hover: none), (pointer: coarse) {
+  .fancy-scroll::-webkit-scrollbar {
+    display: none;
+  }
+  .fancy-scroll {
+    min-width: calc(100% + 16px);
+    padding-bottom: 0px;
+    padding-left: 16px;
+  }
+}
+
+.switch {
+  @apply inline-block h-0 w-[35px] cursor-pointer;
+  @apply focus:outline-0;
+  @apply border-0;
+  @apply focus:ring-offset-transparent;
+  @apply focus:ring-transparent;
+  @apply focus-within:ring-0;
+  @apply focus:shadow-none;
+
+  @apply before:absolute after:absolute;
+  @apply before:top-0.5 after:top-0.5;
+  @apply before:inline-block after:block;
+  @apply before:rounded-full after:rounded-full;
+
+  @apply after:mr-[4px] after:mt-[2.5px] after:size-[14px] after:content-[''];
+  @apply after:shadow-md after:duration-100;
+
+  @apply before:h-[20px] before:w-[35px] before:content-[''];
+  @apply before:shadow-[inset_0_0_#000];
+
+  @apply after:bg-white;
+  @apply before:bg-gray-300;
+  @apply before:checked:bg-primary;
+  @apply checked:after:-translate-x-[14px] checked:after:duration-300;
+
+  @apply disabled:cursor-not-allowed disabled:after:bg-opacity-75;
+  @apply disabled:checked:before:bg-opacity-40;
+}
