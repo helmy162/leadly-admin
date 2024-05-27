@@ -9,6 +9,7 @@ import { ALL_CATEGORIES } from "@/mockups/categories";
 import ImagesUpload from "@/components/ImagesUpload";
 import ClockIcon from "@/components/icons/ClockIcon";
 import AccountIcon from "@/components/icons/AccountIcon";
+import WorkingHoursInput from "@/components/WorkingHoursInput";
 
 export default function AddServiceModal({
   open,
@@ -28,6 +29,13 @@ export default function AddServiceModal({
     let data: any = Object.fromEntries(formData.entries());
 
     console.log("Service data:", data); // handle the data here
+
+
+    // reset the form
+    setCategories([]);
+    setHasDefinedPractitioner(true);
+    setPractitioners([]);
+    setStep(1);
 
     setOpen(false); // close the modal
   };
@@ -53,12 +61,14 @@ export default function AddServiceModal({
           {step == 1 ? (
             <Step1 categories={categories} setCategories={setCategories} />
           ) : step == 2 ? (
-            <Step2
+            <Step2 />
+          ) : step == 3 ? (
+            <Step3
               hasDefinedPractitioner={hasDefinedPractitioner}
               setHasDefinedPractitioner={setHasDefinedPractitioner}
             />
-          ) : step == 3 ? (
-            <Step3
+          ) : step == 4 ? (
+            <Step4
               practitioners={practitioners}
               setPractitioners={setPractitioners}
             />
@@ -68,7 +78,7 @@ export default function AddServiceModal({
         </div>
 
         <div className="mt-3 flex items-center justify-between gap-4 px-4 [&>*]:flex-grow">
-          {(step == 1 || (step == 2 && hasDefinedPractitioner)) && (
+          {(step < 3 || (step == 3 && hasDefinedPractitioner)) && (
             <button
               type="button"
               onClick={() => setStep((prev) => prev + 1)}
@@ -78,7 +88,7 @@ export default function AddServiceModal({
             </button>
           )}
 
-          {(step == 3 || (step == 2 && !hasDefinedPractitioner)) && (
+          {(step == 4 || (step == 3 && !hasDefinedPractitioner)) && (
             <button
               type="submit"
               className="h-14 basis-2/3 rounded-xl bg-primary p-2 font-bold text-white"
@@ -152,7 +162,17 @@ function Step1({
   );
 }
 
-function Step2({
+function Step2() {
+  return (
+    <div className="flex flex-col gap-6">
+      {days.map((day) => (
+        <WorkingHoursInput key={day.value} name={day.value} label={day.name} />
+      ))}
+    </div>
+  );
+}
+
+function Step3({
   hasDefinedPractitioner,
   setHasDefinedPractitioner,
 }: {
@@ -192,7 +212,7 @@ function Step2({
   );
 }
 
-function Step3({
+function Step4({
   practitioners,
   setPractitioners,
 }: {
@@ -235,3 +255,13 @@ function Step3({
     </div>
   );
 }
+
+const days = [
+  { name: "السبت", value: "saturday" },
+  { name: "الأحد", value: "sunday" },
+  { name: "الإثنين", value: "monday" },
+  { name: "الثلاثاء", value: "tuesday" },
+  { name: "الأربعاء", value: "wednesday" },
+  { name: "الخميس", value: "thursday" },
+  { name: "الجمعة", value: "friday" },
+];
