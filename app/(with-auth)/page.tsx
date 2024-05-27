@@ -5,9 +5,11 @@ import Appointments from "@/sections/Appointments";
 import { arabic_font, english_font } from "@/fonts";
 import PlusIcon from "@/components/icons/PlusIcon";
 import NoAppointments from "@/sections/NoAppointments";
+import ReservationModal from "@/sections/ReservationModal";
 
 export default function Home() {
   const [day, setDay] = useState(new Date().getDate());
+  const [reserveModalOpen, setReserveModalOpen] = useState(false);
 
   const hasAppointment = true;
   return (
@@ -26,7 +28,7 @@ export default function Home() {
         </div>
         <button
           type="button"
-          onClick={() => console.log(true)}
+          onClick={() => setReserveModalOpen(true)}
           className="focus:shadow-outline flex h-12 w-fit items-center justify-center gap-2 rounded-xl bg-primary px-4 py-2 text-sm font-bold text-white hover:bg-primaryHover focus:outline-none"
         >
           <PlusIcon />
@@ -38,6 +40,7 @@ export default function Home() {
 
       {hasAppointment ? <Appointments /> : <NoAppointments />}
 
+      <ReservationModal open={reserveModalOpen} setOpen={setReserveModalOpen} />
     </main>
   );
 }

@@ -5,7 +5,7 @@ const SelectInput = ({
   options,
   name,
   label,
-  placeholder,
+  placeholder = "اختر...",
   required = false,
 }: {
   options: { name: string }[];
