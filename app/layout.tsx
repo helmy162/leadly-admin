@@ -18,7 +18,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ar" dir="rtl" className={`${arabic_font.className} `}>
-      <body className="mx-auto flex min-h-screen max-w-[375px] flex-col items-center overflow-x-hidden py-6">
+      <body className="!mx-auto !my-auto flex min-h-screen max-w-[430px] flex-col items-center overflow-x-hidden !py-6 !px-0"
+        style={{marginRight: "auto !important"}}
+      >
         <Header />
         {children}
       </body>

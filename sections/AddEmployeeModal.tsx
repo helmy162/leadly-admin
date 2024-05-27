@@ -1,28 +1,19 @@
 import CloseIcon from "@/components/icons/CloseIcon";
 import Modal from "@/components/Modal";
-import MultiSelectInput from "@/components/MultiSelectInput";
 import TextInput from "@/components/TextInput";
-import SelectInput from "@/components/SelectInput";
 import { Option } from "@/lib/types";
 import { useState } from "react";
-import { ALL_CATEGORIES } from "@/mockups/categories";
-import ImagesUpload from "@/components/ImagesUpload";
-import ClockIcon from "@/components/icons/ClockIcon";
-import AccountIcon from "@/components/icons/AccountIcon";
+import WorkingHoursInput from "@/components/WorkingHoursInput";
 
-export default function AddCategoryModal({
+export default function AddEmployeeModal({
   open,
   setOpen,
 }: {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
-  const [categories, setCategories] = useState<Option[]>([]);
-  const [hasDefinedPractitioner, setHasDefinedPractitioner] = useState(true);
-  const [practitioners, setPractitioners] = useState<Option[]>([]);
-  const [step, setStep] = useState(1);
 
-  const handleAddCategory = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleAddEmployee = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
     let data: any = Object.fromEntries(formData.entries());
@@ -36,7 +27,7 @@ export default function AddCategoryModal({
     <Modal showModal={open} setShowModal={setOpen}>
       <form
         className="relative z-[100] flex flex-col gap-4 py-6"
-        onSubmit={handleAddCategory}
+        onSubmit={handleAddEmployee}
       >
         <div className="flex w-full items-center justify-between px-4">
           <h2 className="font-bold text-black">إضافة تصنيف</h2>
@@ -49,13 +40,22 @@ export default function AddCategoryModal({
           </button>
         </div>
         <hr className="border-[#F1F5F9]" />
-        <div className="px-4">
+        <div className="px-4 flex flex-col gap-6">
           <TextInput
             name="name"
-            label="اسم التصنيف"
-            placeholder="اسم التصنيف"
+            label="اسم الموظف"
+            placeholder="اسم الموظف"
             required
           />
+          {
+            days.map((day) => (
+              <WorkingHoursInput
+                key={day.value}
+                name={day.value}
+                label={day.name}
+              />
+            ))
+          }
         </div>
 
         <div className="mt-3 flex items-center justify-between gap-4 px-4 [&>*]:flex-grow">
@@ -70,3 +70,15 @@ export default function AddCategoryModal({
     </Modal>
   );
 }
+
+const days = [
+  { name: "السبت", value: "saturday" },
+  { name: "الأحد", value: "sunday" },
+  { name: "الإثنين", value: "monday" },
+  { name: "الثلاثاء", value: "tuesday" },
+  { name: "الأربعاء", value: "wednesday" },
+  { name: "الخميس", value: "thursday" },
+  { name: "الجمعة", value: "friday" },
+];
+
+
