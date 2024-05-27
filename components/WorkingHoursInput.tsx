@@ -1,5 +1,5 @@
+"use client";
 import { useState } from "react";
-import InfoIcon from "./icons/InfoIcon";
 
 const WorkingHoursInput = ({
   name,
