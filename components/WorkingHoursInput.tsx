@@ -87,5 +87,3 @@ const hours = Array.from({ length: 23 }, (_, i) => {
     value: hour,
   };
 });
-
-console.log(hours);

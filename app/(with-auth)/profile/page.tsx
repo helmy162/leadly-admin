@@ -7,7 +7,6 @@ import { english_font } from "@/fonts";
 import Image from "next/image";
 
 export default function Home() {
-  const hasAppointment = true;
   return (
     <main className="flex h-full w-full flex-grow flex-col gap-4 pb-10 text-black">
       <div className="flex flex-col gap-7 rounded-xl bg-white p-4 pb-10">

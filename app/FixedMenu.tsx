@@ -31,8 +31,8 @@ const menu = [
     icon: <AccountIcon />,
   },
   {
-    name: "Settings",
-    href: "/settings",
+    name: "Profile",
+    href: "/profile",
     icon: <SettingsIcon />,
   },
   {
