@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Footer from "./Footer";
 import "./globals.css";
 import "react-image-gallery/styles/css/image-gallery.css";
 import "react-alice-carousel/lib/alice-carousel.css";

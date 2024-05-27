@@ -1,17 +1,15 @@
 "use client";
-import HomePage from "../HomePage";
 import DaysFilter from "@/sections/DaysFilter";
 import { useState } from "react";
 import Appointments from "@/sections/Appointments";
 import { arabic_font, english_font } from "@/fonts";
-import FilterMenu from "@/components/FilterMenu";
 import PlusIcon from "@/components/icons/PlusIcon";
 import NoAppointments from "@/sections/NoAppointments";
 
 export default function Home() {
   const [day, setDay] = useState(new Date().getDate());
 
-  const hasAppointment = false;
+  const hasAppointment = true;
   return (
     <main className="flex h-full w-full flex-grow flex-col gap-4 pb-10 text-primary">
       <div className="flex items-start justify-between">
@@ -40,7 +38,6 @@ export default function Home() {
 
       {hasAppointment ? <Appointments /> : <NoAppointments />}
 
-      <HomePage />
     </main>
   );
 }

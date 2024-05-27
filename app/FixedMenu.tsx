@@ -37,8 +37,8 @@ const menu = [
     icon: <SettingsIcon />,
   },
   {
-    name: "Calendar",
-    href: "/calendar",
+    name: "Home",
+    href: "/",
     icon: <CalendarIcon />,
   },
   {
@@ -47,8 +47,8 @@ const menu = [
     icon: <ServiceIcon />,
   },
   {
-    name: "Home",
-    href: "/",
+    name: "Categories",
+    href: "/categories",
     icon: <DashboardIcon />,
   },
 ];

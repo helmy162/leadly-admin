@@ -16,10 +16,10 @@ export default function MenuItem({
   const isActive = pathname === href;
 
   return (
-    <Link href={href} className="relative">
+    <Link href={href} className="relative size-6 flex items-center justify-center">
       {icon}
       {isActive && (
-        <div className="b-0 bg-darkBlue absolute h-1 w-full rounded-xl" />
+        <div className="-bottom-1 bg-darkBlue absolute h-1 w-full rounded-xl" />
       )}
     </Link>
   );

@@ -20,7 +20,7 @@ const config: Config = {
         darkBlue: "#0035AB",
         bgGray: "#F8FAFC",
         textGray: "#64748B",
-        placeholder: "#94A3B8",
+        placeholder: "#C9C9C9",
         black: "#0F172A",
         borderGray: "#E2E8F0",
 

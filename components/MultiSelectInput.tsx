@@ -7,14 +7,14 @@ const MultiSelectInput = ({
   options,
   name,
   label,
-  startingValue,
+  required = false,
   value,
   setValue,
 }: {
   options: { name: string }[];
   name: string;
   label: string;
-  startingValue?: string;
+  required?: boolean;
   value: Option[] | null;
   setValue: (value: Option[]) => void;
 }) => {
@@ -34,6 +34,7 @@ const MultiSelectInput = ({
       <div className="flex items-center justify-between">
         <label htmlFor={name} className="text-xs font-semibold text-black">
           {label}
+          {required && <span className="text-[#AE0000]"> *</span>}
         </label>
         <InfoIcon className="text-textGray" />
       </div>
@@ -44,6 +45,17 @@ const MultiSelectInput = ({
         isMulti
         onChange={handleChange}
         placeholder={`اختر ${label}`}
+        styles={{
+          placeholder: (base) => ({
+            ...base,
+            color: "#C9C9C9",
+            textAlign: "right",
+          }),
+          indicatorSeparator: (base, props) => ({
+            ...base,
+            display: "none",
+          }),
+        }}
       />
     </div>
   );

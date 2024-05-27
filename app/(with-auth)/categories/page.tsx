@@ -1,28 +1,28 @@
 "use client";
 
-import AddServiceModal from "@/sections/AddServiceModal";
+import AddCategoryModal from "@/sections/AddCategoryModal";
 import PlusIcon from "@/components/icons/PlusIcon";
 import ServiceIcon from "@/components/icons/ServiceIcon";
-import Services from "@/sections/Services";
 import { useState } from "react";
+import Categories from "@/sections/Categories";
 
-export default function ServicesPage() {
-  const [addServiceModal, setAddServiceModal] = useState(false);
+export default function CategoriesPage() {
+  const [addCategoryModal, setAddCategoryModal] = useState(false);
   return (
     <main className="flex h-full w-full flex-grow flex-col gap-6 pb-10 text-primary">
       <div className="flex flex-col gap-1">
-        <h2 className="text-2xl font-bold text-black">إدارة الخدمات</h2>
-        <h2 className="text-xs text-textGray">تحكم بالخدمات وأسعارها</h2>
+        <h2 className="text-2xl font-bold text-black">إدارة التصنيفات</h2>
+        <h2 className="text-xs text-textGray">تحكم بالتصنيفات</h2>
       </div>
 
       <div className="flex items-center justify-between gap-[76px]">
         <button
           type="button"
-          onClick={() => setAddServiceModal(true)}
+          onClick={() => setAddCategoryModal(true)}
           className="focus:shadow-outline flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-primary px-4 py-2 text-sm font-bold text-white hover:bg-primaryHover focus:outline-none"
         >
           <PlusIcon />
-          إضافة خدمة
+          إضافة تصنيف
         </button>
 
         <button className="rounded-xl bg-white p-3 text-primary">
@@ -30,9 +30,9 @@ export default function ServicesPage() {
         </button>
       </div>
 
-      <Services />
+      <Categories />
 
-      <AddServiceModal open={addServiceModal} setOpen={setAddServiceModal} />
+      <AddCategoryModal open={addCategoryModal} setOpen={setAddCategoryModal} />
     </main>
   );
 }

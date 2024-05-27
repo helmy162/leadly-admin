@@ -1,36 +1,50 @@
 import { useState } from "react";
+import InfoIcon from "./icons/InfoIcon";
 
 const SelectInput = ({
   options,
   name,
   label,
   placeholder,
-  startingValue,
+  required = false,
 }: {
-  options: { name: string;}[];
+  options: { name: string }[];
   name: string;
   label: string;
   placeholder?: string;
-  startingValue?: string;
+  required?: boolean;
 }) => {
   const [value, setValue] = useState("");
 
   return (
-    <div className="border-borderGray flex flex-col gap-3 rounded-lg border p-4">
-      <select
-        id={name}
-        name={name}
-        className="text-lg font-semibold text-black !outline-none bg-transparent"
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-      >
-        {placeholder && <option value="" disabled>{placeholder}</option>}
-        {options.map((option) => (
-          <option key={option.name} value={option.name}>
-            {option.name}
-          </option>
-        ))}
-      </select>
+    <div className="flex flex-col gap-2.5">
+      <div className="flex items-center justify-between">
+        <label htmlFor={name} className="text-xs font-semibold text-black">
+          {label}
+          {required && <span className="text-[#AE0000]"> *</span>}
+        </label>
+        <InfoIcon className="text-textGray" />
+      </div>
+      <div className="flex flex-col gap-3 rounded-lg border border-borderGray py-2 px-4">
+        <select
+          id={name}
+          name={name}
+          className={`bg-transparent text-sm font-semibold ${value=="" ? "text-placeholder" : "text-textGray"} !outline-none`}
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+        >
+          {placeholder && (
+            <option value="" disabled >
+              {placeholder}
+            </option>
+          )}
+          {options.map((option) => (
+            <option key={option.name} value={option.name}>
+              {option.name}
+            </option>
+          ))}
+        </select>
+      </div>
     </div>
   );
 };
