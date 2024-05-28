@@ -1,11 +1,12 @@
+"use client"
 import DayButton from "@/components/DayButton";
 
 export default function DaysFilter({
   day,
   setDay,
 }: {
-  day: number;
-  setDay: React.Dispatch<React.SetStateAction<number>>;
+  day: number | null;
+  setDay: React.Dispatch<React.SetStateAction<number | null>>;
 }) {
   // get the next 7 days
   const days = Array.from({ length: 7 }, (_, i) => {

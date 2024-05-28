@@ -1,6 +1,6 @@
 "use client";
 import DaysFilter from "@/sections/DaysFilter";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Appointments from "@/sections/Appointments";
 import { arabic_font, english_font } from "@/fonts";
 import PlusIcon from "@/components/icons/PlusIcon";
@@ -8,8 +8,12 @@ import NoAppointments from "@/sections/NoAppointments";
 import ReservationModal from "@/sections/ReservationModal";
 
 export default function Home() {
-  const [day, setDay] = useState(new Date().getDate());
+  const [day, setDay] = useState<number | null>(null);
   const [reserveModalOpen, setReserveModalOpen] = useState(false);
+
+  useEffect(() => {
+    setDay(new Date().getDate());
+  }, []);
 
   const hasAppointment = true;
   return (

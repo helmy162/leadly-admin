@@ -138,8 +138,8 @@ export default function Logo({
       </mask>
       <g mask="url(#mask2_1_5176)">
         <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
+          fillRule="evenodd"
+          clipRule="evenodd"
           d="M11.2187 26.7953H26.7943V16.2336H19.4928V18.3444H24.6835V24.6832H13.154V11.043H11.0432V26.7953H11.2187ZM17.3807 11.043V6.81628H6.81525V26.7953H8.92734V8.92713H15.2661V22.5724H22.5714V20.4565H17.3807V11.043Z"
           fill="white"
         />

@@ -7,7 +7,7 @@ export default function DayButton({
     day: string;
     number: number;
   };
-  day: number;
+  day: number | null;
   setDay: (value: number) => void;
 }) {
   const isActive = day == button.number;
