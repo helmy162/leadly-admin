@@ -7,14 +7,24 @@ import { periods } from "@/mockups/periods";
 import { services } from "@/mockups/services";
 import { Option } from "@/lib/types";
 import DatePicker from "@/components/DatePicker";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function ReservationModal({
   open,
   setOpen,
+  appointment,
+  onSuccess
 }: {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  appointment?: {
+    clientName: string;
+    services: string[];
+    time: string;
+    date: string;
+    phoneNumber: string;
+  };
+  onSuccess: Function;
 }) {
   const [reservedServices, setReservedServices] = useState<Option[]>([]);
   const handleReservation = (e: React.FormEvent<HTMLFormElement>) => {
@@ -22,10 +32,30 @@ export default function ReservationModal({
     const formData = new FormData(e.target as HTMLFormElement);
     let data: any = Object.fromEntries(formData.entries());
 
-    console.log("Reservation data:", data); // handle the data here
+    console.log("Reservation data:", data);
+
+    if (appointment) {
+      // Update the appointment
+    } else {
+      // Create a new appointment
+    }
 
     setOpen(false); // close the modal
+    onSuccess();
   };
+  useEffect(() => {
+    if (appointment) {
+      // Set the initial services by filtering "all" services array
+      setReservedServices(
+        services
+          .filter((service) => appointment.services.includes(service.name))
+          .map((service) => ({
+            label: service.name,
+            value: service.name,
+          })),
+      );
+    }
+  }, [appointment]);
   return (
     <Modal showModal={open} setShowModal={setOpen}>
       <form
@@ -33,7 +63,7 @@ export default function ReservationModal({
         onSubmit={handleReservation}
       >
         <div className="flex w-full items-center justify-between">
-          <h2 className="text-2xl font-bold text-black">حجز موعد</h2>
+          <h2 className="text-2xl font-bold text-black">{appointment ? "تعديل" : "حجز"} موعد</h2>
           <CloseIcon
             onClick={() => setOpen(false)}
             width={24}
@@ -47,24 +77,36 @@ export default function ReservationModal({
           options={services}
           value={reservedServices}
           setValue={setReservedServices}
+          tooltip="اختر الخدمات المناسبة للمستخدم"
         />
-        <TextInput name="name" label="الاسم" placeholder="الاسم هنا..." />
+        <TextInput
+          name="name"
+          label="الاسم"
+          placeholder="الاسم هنا..."
+          intialValue={appointment?.clientName}
+          tooltip="أدخل اسم المستخدم هنا"
+        />
         <TextInput
           name="phone"
           label="رقم الجوال"
           placeholder="05xxxxxxxx"
           type="tel"
+          intialValue={appointment?.phoneNumber}
+          tooltip="أدخل رقم جوال المستخدم هنا"
         />
-        <DatePicker />
-        <SelectInput name="period" label="الفترة" options={periods} />
-        <h3 className="text-lightGray text-sm font-normal">
-          يمكنك الآن حجز موعدك من خلال الضغط على الزر أدناه
-        </h3>
+        <DatePicker intialValue={appointment?.date} />
+        <SelectInput
+          name="period"
+          label="الفترة"
+          options={periods}
+          placeholder={appointment?.time}
+          tooltip="اختر الفترة المناسبة للمستخدم"
+        />
         <button
           className="rounded-lg border-2 bg-primary px-6 py-3 font-bold text-white"
           type="submit"
         >
-          حجز
+          {appointment ? "تعديل الحجز" : "حجز"}
         </button>
       </form>
     </Modal>

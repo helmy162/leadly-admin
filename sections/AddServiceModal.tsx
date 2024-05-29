@@ -4,24 +4,50 @@ import MultiSelectInput from "@/components/MultiSelectInput";
 import TextInput from "@/components/TextInput";
 import SelectInput from "@/components/SelectInput";
 import { Option } from "@/lib/types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ALL_CATEGORIES } from "@/mockups/categories";
 import ImagesUpload from "@/components/ImagesUpload";
 import ClockIcon from "@/components/icons/ClockIcon";
 import AccountIcon from "@/components/icons/AccountIcon";
 import WorkingHoursInput from "@/components/WorkingHoursInput";
+import { services } from "@/mockups/services";
 
 export default function AddServiceModal({
   open,
   setOpen,
+  onSuccess,
+  service,
 }: {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  onSuccess: Function;
+  service?: (typeof services)[0];
 }) {
   const [categories, setCategories] = useState<Option[]>([]);
   const [hasDefinedPractitioner, setHasDefinedPractitioner] = useState(true);
   const [practitioners, setPractitioners] = useState<Option[]>([]);
   const [step, setStep] = useState(1);
+
+  useEffect(() => {
+    if (service) {
+      setCategories(
+        service.categories.map((category) => ({
+          label: category,
+          value: category,
+        })),
+      );
+      if (service.practitioners && service.practitioners.length > 0) {
+        setPractitioners(
+          service.practitioners.map((practitioner) => ({
+            label: practitioner,
+            value: practitioner,
+          })),
+        );
+      } else {
+        setHasDefinedPractitioner(false);
+      }
+    }
+  }, [service]);
 
   const handleAddService = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -30,7 +56,6 @@ export default function AddServiceModal({
 
     console.log("Service data:", data); // handle the data here
 
-
     // reset the form
     setCategories([]);
     setHasDefinedPractitioner(true);
@@ -38,6 +63,7 @@ export default function AddServiceModal({
     setStep(1);
 
     setOpen(false); // close the modal
+    onSuccess();
   };
 
   return (
@@ -58,23 +84,10 @@ export default function AddServiceModal({
         </div>
         <hr className="border-[#F1F5F9]" />
         <div className="px-4">
-          {step == 1 ? (
-            <Step1 categories={categories} setCategories={setCategories} />
-          ) : step == 2 ? (
-            <Step2 />
-          ) : step == 3 ? (
-            <Step3
-              hasDefinedPractitioner={hasDefinedPractitioner}
-              setHasDefinedPractitioner={setHasDefinedPractitioner}
-            />
-          ) : step == 4 ? (
-            <Step4
-              practitioners={practitioners}
-              setPractitioners={setPractitioners}
-            />
-          ) : (
-            <p>Unexpected Behaviour</p>
-          )}
+          <Step1 categories={categories} setCategories={setCategories} service={service} show={step == 1} />
+          <Step2 service={service} show={step == 2}/>
+          <Step3 hasDefinedPractitioner={hasDefinedPractitioner} setHasDefinedPractitioner={setHasDefinedPractitioner} show={step == 3}/>
+          <Step4 practitioners={practitioners} setPractitioners={setPractitioners} service={service} show={step == 4}/>
         </div>
 
         <div className="mt-3 flex items-center justify-between gap-4 px-4 [&>*]:flex-grow">
@@ -115,17 +128,23 @@ export default function AddServiceModal({
 function Step1({
   categories,
   setCategories,
+  service,
+  show
 }: {
   categories: Option[];
   setCategories: React.Dispatch<React.SetStateAction<Option[]>>;
+  service?: (typeof services)[0];
+  show: boolean;
 }) {
   return (
-    <div className="flex flex-col gap-6">
+    <div className={`${show ? "flex" : "hidden"} flex-col gap-6`}>
       <TextInput
         name="name"
         label="اسم الخدمة"
         placeholder="اسم الخدمة أو العرض"
         required
+        tooltip="أدخل اسم الخدمة هنا"
+        intialValue={service?.name}
       />
       <TextInput
         multiline
@@ -133,6 +152,8 @@ function Step1({
         name="description"
         label="وصف الخدمة"
         placeholder="خدمة مناكير يدين فقط + لون عادي وتشمل النوع الفرنسي فقط..."
+        tooltip="أدخل وصف الخدمة هنا"
+        intialValue={service?.description}
       />
 
       <MultiSelectInput
@@ -142,31 +163,45 @@ function Step1({
         value={categories}
         setValue={setCategories}
         required
+        tooltip="اختر تصنيفات الخدمة"
       />
 
-      <ImagesUpload name="صور الخدمة" />
+      <ImagesUpload
+        name="صور الخدمة"
+        tooltip="أضف صور للخدمة لتظهر بشكل أفضل للمستخدمين"
+        intialValue={service?.images}
+      />
 
       <TextInput
         name="price"
         label="سعر الخدمة"
         placeholder="سعر الخدمة أو العرض"
         required
+        tooltip="أدخل سعر الخدمة هنا"
+        intialValue={service?.oldPrice?.toString()}
       />
 
       <TextInput
         name="new_price"
         label="السعر بعد الخصم"
         placeholder="يترك فارغاً لإلغاء الخصم.."
+        tooltip="أدخل السعر بعد الخصم هنا"
+        intialValue={service?.price?.toString()}
       />
     </div>
   );
 }
 
-function Step2() {
+function Step2({ service, show }: { service?: (typeof services)[0], show: boolean}) {
   return (
-    <div className="flex flex-col gap-6">
+    <div className={`${show ? "flex" : "hidden"} flex-col gap-6`}>
       {days.map((day) => (
-        <WorkingHoursInput key={day.value} name={day.value} label={day.name} />
+        <WorkingHoursInput
+          key={day.value}
+          name={day.value}
+          label={day.name}
+          intialValue={service?.days && day.value in service?.days! ? service?.days[day.value as keyof typeof service.days] : null}
+        />
       ))}
     </div>
   );
@@ -175,12 +210,14 @@ function Step2() {
 function Step3({
   hasDefinedPractitioner,
   setHasDefinedPractitioner,
+  show
 }: {
   hasDefinedPractitioner: boolean;
   setHasDefinedPractitioner: React.Dispatch<React.SetStateAction<boolean>>;
+  show: boolean;
 }) {
   return (
-    <div className="flex gap-3">
+    <div className={`${show ? "flex" : "hidden"} gap-3`}>
       <button
         className={`flex w-full flex-col items-center gap-2 rounded-xl border-2 ${!hasDefinedPractitioner ? "border-[#E8E8E8]" : "border-primary"} px-2 py-4`}
         type="button"
@@ -215,12 +252,16 @@ function Step3({
 function Step4({
   practitioners,
   setPractitioners,
+  service,
+  show
 }: {
   practitioners: Option[];
   setPractitioners: React.Dispatch<React.SetStateAction<Option[]>>;
+  service?: (typeof services)[0];
+  show: boolean;
 }) {
   return (
-    <div className="flex flex-col gap-6">
+    <div className={`${show ? "flex" : "hidden"} flex-col gap-6`}>
       <MultiSelectInput
         name="practitioners"
         label="الممارسين"
@@ -228,40 +269,44 @@ function Step4({
         value={practitioners}
         setValue={setPractitioners}
         required
+        tooltip="اختر الممارسين المناسبين للخدمة"
       />
 
       <SelectInput
         options={ALL_CATEGORIES}
         name="duration"
         label="مدة الجلسة"
-        placeholder="اختر..."
+        placeholder={service ? service.duration : "اختر..."}
         required
+        tooltip="اختر مدة الجلسة هنا"
       />
 
       <SelectInput
         options={ALL_CATEGORIES}
         name="min_hours_before_booking"
         label="أقل مدة قبل الحجز (أيام/ساعات)"
-        placeholder="اختر..."
+        placeholder={service ? service.minimumDaysBeforeReservation.toString() : "اختر..."}
         required
+        tooltip="اختر أقل مدة قبل الحجز هنا"
       />
       <SelectInput
         options={ALL_CATEGORIES}
         name="min_days_before_booking"
         label="أقل مدة قبل الحجز"
-        placeholder="اختر..."
+        placeholder={service ? service.minimumDaysBeforeReservation.toString() : "اختر..."}
         required
+        tooltip="اختر أقل مدة قبل الحجز هنا"
       />
     </div>
   );
 }
 
 const days = [
-  { name: "السبت", value: "saturday" },
-  { name: "الأحد", value: "sunday" },
-  { name: "الإثنين", value: "monday" },
-  { name: "الثلاثاء", value: "tuesday" },
-  { name: "الأربعاء", value: "wednesday" },
-  { name: "الخميس", value: "thursday" },
-  { name: "الجمعة", value: "friday" },
+  { name: "السبت", value: "Saturday" },
+  { name: "الأحد", value: "Sunday" },
+  { name: "الإثنين", value: "Monday" },
+  { name: "الثلاثاء", value: "Tuesday" },
+  { name: "الأربعاء", value: "Wednesday" },
+  { name: "الخميس", value: "Thursday" },
+  { name: "الجمعة", value: "Friday" },
 ];

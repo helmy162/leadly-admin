@@ -5,9 +5,16 @@ import TextInput from "@/components/TextInput";
 export default function AddCategoryModal({
   open,
   setOpen,
+  onSuccess,
+  category,
 }: {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  onSuccess: Function;
+  category?: {
+    id: string;
+    name: string;
+  };
 }) {
 
   const handleAddCategory = (e: React.FormEvent<HTMLFormElement>) => {
@@ -18,6 +25,7 @@ export default function AddCategoryModal({
     console.log("Category data:", data); // handle the data here
 
     setOpen(false); // close the modal
+    onSuccess();
   };
 
   return (
@@ -27,7 +35,7 @@ export default function AddCategoryModal({
         onSubmit={handleAddCategory}
       >
         <div className="flex w-full items-center justify-between px-4">
-          <h2 className="font-bold text-black">إضافة تصنيف</h2>
+          <h2 className="font-bold text-black">{category ? "تعديل" : "إضافة"} تصنيف</h2>
           <button
             type="button"
             onClick={() => setOpen(false)}
@@ -42,7 +50,9 @@ export default function AddCategoryModal({
             name="name"
             label="اسم التصنيف"
             placeholder="اسم التصنيف"
+            tooltip="أدخل اسم التصنيف هنا"
             required
+            intialValue={category?.name}
           />
         </div>
 
@@ -51,7 +61,7 @@ export default function AddCategoryModal({
             type="submit"
             className="h-14 rounded-xl bg-primary p-2 font-bold text-white"
           >
-            إضافة
+            {category ? "تعديل" : "إضافة"}
           </button>
         </div>
       </form>

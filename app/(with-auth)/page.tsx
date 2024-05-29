@@ -6,16 +6,66 @@ import { arabic_font, english_font } from "@/fonts";
 import PlusIcon from "@/components/icons/PlusIcon";
 import NoAppointments from "@/sections/NoAppointments";
 import ReservationModal from "@/sections/ReservationModal";
+import ConfirmationModal from "@/sections/ConfirmationModal";
+import { appointments } from "@/mockups/appointments";
+import FilterMenu from "@/components/FilterMenu";
+import { employees } from "@/mockups/employees";
+import { services } from "@/mockups/services";
 
 export default function Home() {
-  const [day, setDay] = useState<number | null>(null);
+  const [day, setDay] = useState<string | null>(null);
   const [reserveModalOpen, setReserveModalOpen] = useState(false);
+  const [confirmModal, setConfirmModal] = useState(false);
+
+  const [employeesFilter, setEmployeesFilter] = useState<string>("");
+  const [servicesFilter, setServicesFilter] = useState<string>("");
+
+  const [filteredAppointments, setFilteredAppointments] =
+    useState(appointments);
 
   useEffect(() => {
-    setDay(new Date().getDate());
+    const date = new Date();
+    const todayValue = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+    setDay(todayValue);
   }, []);
 
-  const hasAppointment = true;
+  useEffect(() => {
+    let filtered = appointments;
+
+    if (day) {
+      filtered = filtered.filter((appointment) => appointment.date === day);
+    }
+
+    if (employeesFilter) {
+      filtered = filtered.filter((appointment) =>
+        appointment.employees?.includes(employeesFilter),
+      );
+    }
+
+    if (servicesFilter) {
+      filtered = filtered.filter((appointment) =>
+        appointment.services?.includes(servicesFilter),
+      );
+    }
+
+    setFilteredAppointments(filtered);
+  }, [day, employeesFilter, servicesFilter]);
+
+  // get today's date
+  const fullDate = new Date();
+  const todayDay = fullDate.toLocaleDateString("en-US", {
+    day: "numeric",
+  });
+  const todayMonth = fullDate.toLocaleDateString("en-US", {
+    month: "long",
+  });
+  const todayYear = fullDate.toLocaleDateString("en-US", {
+    year: "numeric",
+  });
+  const today = `${todayDay} ${todayMonth}, ${todayYear}`;
+
+  const hasAppointments = filteredAppointments.length > 0;
+
   return (
     <main className="flex h-full w-full flex-grow flex-col gap-4 pb-10 text-primary">
       <div className="flex items-start justify-between">
@@ -26,7 +76,7 @@ export default function Home() {
             className={`${english_font.className} text-right font-bold text-black`}
           >
             <bdi>
-              19 May, 2024 <span className={arabic_font.className}>اليوم</span>
+              {today} <span className={arabic_font.className}>اليوم</span>
             </bdi>
           </h2>
         </div>
@@ -42,9 +92,35 @@ export default function Home() {
 
       <DaysFilter day={day} setDay={setDay} />
 
-      {hasAppointment ? <Appointments /> : <NoAppointments />}
+      <div className="flex gap-5">
+        <FilterMenu
+          name="الموظفين"
+          options={employees.map((e) => e.name)}
+          onChange={setEmployeesFilter}
+        />
+        <FilterMenu
+          name="الخدمات"
+          options={services.map((s) => s.name)}
+          onChange={setServicesFilter}
+        />
+      </div>
 
-      <ReservationModal open={reserveModalOpen} setOpen={setReserveModalOpen} />
+      {hasAppointments ? (
+        <Appointments appointments={filteredAppointments} />
+      ) : (
+        <NoAppointments />
+      )}
+
+      <ReservationModal
+        open={reserveModalOpen}
+        setOpen={setReserveModalOpen}
+        onSuccess={() => setConfirmModal(true)}
+      />
+      <ConfirmationModal
+        open={confirmModal}
+        setOpen={setConfirmModal}
+        title="تمت إضافة الحجز بنجاح"
+      />
     </main>
   );
 }

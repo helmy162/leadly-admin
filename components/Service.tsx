@@ -1,14 +1,30 @@
 "use client";
 import { Draggable } from "@hello-pangea/dnd";
 import { english_font } from "@/fonts";
-import DotsIcon from "./icons/DotsIcon";
 import { useState } from "react";
+import DotsMenu from "./DotsMenu";
 
-export default function Service({ id, order }: { id: string; order: number }) {
-  const [active, setActive] = useState(true);
+export default function Service({
+  data,
+  onEdit,
+  onDelete,
+}: {
+  data: {
+    id: number;
+    order: number;
+    name: string;
+    categories: string[];
+    discountActive: boolean;
+    active: boolean;
+    price: number;
+  };
+  onEdit: () => void;
+  onDelete: () => void;
+}) {
+  const [active, setActive] = useState(data.active || false);
 
   return (
-    <Draggable draggableId={id} index={order}>
+    <Draggable draggableId={data.id.toString()} index={data.order}>
       {(provided) => (
         <div
           className="flex flex-col gap-4 rounded-lg border border-[#F1F5F9] py-5"
@@ -17,9 +33,7 @@ export default function Service({ id, order }: { id: string; order: number }) {
           {...provided.dragHandleProps}
         >
           <div className="flex items-center justify-between px-4">
-            <h4 className="text-xs font-semibold text-black">
-              منكير كلاسيك + لون عادي {id}
-            </h4>
+            <h4 className="text-xs font-semibold text-black">{data.name}</h4>
             <div className="relative flex h-6 items-center gap-4">
               <input
                 type="checkbox"
@@ -27,9 +41,7 @@ export default function Service({ id, order }: { id: string; order: number }) {
                 checked={active}
                 onChange={() => setActive(!active)}
               />
-              <button className="text-textGray">
-                <DotsIcon />
-              </button>
+              <DotsMenu onDelete={onDelete} onEdit={onEdit} />
             </div>
           </div>
           <hr className="border-[#F1F5F9]" />
@@ -37,21 +49,23 @@ export default function Service({ id, order }: { id: string; order: number }) {
             <div className="flex items-center justify-between">
               <h4 className="text-xs font-medium text-textGray">التصنيف </h4>
               <h5 className="text-xs font-semibold text-black">
-                عناية الأظافر{" "}
+                {data.categories.join(", ")}
               </h5>
             </div>
             <div className="flex items-center justify-between">
               <h4 className="text-xs font-medium text-textGray">
                 تفعيل الخصم{" "}
               </h4>
-              <h5 className="text-xs font-semibold text-black">غير مفعل </h5>
+              <h5 className="text-xs font-semibold text-black">
+                {data.discountActive ? "مفعل" : "غير مفعل"}
+              </h5>
             </div>
             <div className="flex items-center justify-between">
               <h4 className="text-xs font-medium text-textGray">السعر </h4>
               <h5
                 className={`${english_font.className} text-left text-xs font-semibold text-black`}
               >
-                <bdi>173 sr</bdi>
+                <bdi>{data.price} sr</bdi>
               </h5>
             </div>
           </div>

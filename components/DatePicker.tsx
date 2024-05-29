@@ -11,9 +11,9 @@ const days = [
   "السبت",
 ];
 
-export default function DatePicker() {
+export default function DatePicker({intialValue}: {intialValue?: string}) {
   const [currentWeek, setCurrentWeek] = useState<number>(0);
-  const [selectedDate, setSelectedDate] = useState<string>("");
+  const [selectedDate, setSelectedDate] = useState<string>(intialValue || "");
 
   const handlePreviousWeek = () => {
     setCurrentWeek((prevWeek) => prevWeek - 1);

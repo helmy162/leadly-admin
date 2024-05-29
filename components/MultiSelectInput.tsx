@@ -1,13 +1,13 @@
 import { Option } from "@/lib/types";
-import { useState } from "react";
 import Select from "react-select";
-import InfoIcon from "./icons/InfoIcon";
+import TooltipInfo from "./TooltipInfo";
 
 const MultiSelectInput = ({
   options,
   name,
   label,
   required = false,
+  tooltip,
   value,
   setValue,
 }: {
@@ -15,6 +15,7 @@ const MultiSelectInput = ({
   name: string;
   label: string;
   required?: boolean;
+  tooltip?: string;
   value: Option[] | null;
   setValue: (value: Option[]) => void;
 }) => {
@@ -36,7 +37,7 @@ const MultiSelectInput = ({
           {label}
           {required && <span className="text-[#AE0000]"> *</span>}
         </label>
-        <InfoIcon className="text-textGray" />
+        {tooltip && <TooltipInfo title={tooltip} />}
       </div>
       <Select
         className="text-sm font-semibold text-textGray placeholder:text-placeholder"

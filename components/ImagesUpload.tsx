@@ -1,20 +1,31 @@
 import { Option } from "@/lib/types";
-import { useState } from "react";
-import Select from "react-select";
-import InfoIcon from "./icons/InfoIcon";
+import { use, useEffect, useState } from "react";
 import UploadIcon from "./icons/UploadIcon";
 import CloseIcon from "./icons/CloseIcon";
 import Image from "next/image";
+import TooltipInfo from "./TooltipInfo";
 
-const ImagesUpload = ({ name }: { name: string }) => {
+const ImagesUpload = ({ name, tooltip, intialValue}: { name: string, tooltip?: string, intialValue?: string[]}) => {
   const [images, setImages] = useState<Option[]>([]);
+
+  useEffect(() => {
+    if (intialValue) {
+      const imagesArray = intialValue.map((img, index) => {
+        return {
+          value: img,
+          label: `image-${index}`,
+        };
+      });
+      setImages(imagesArray);
+    }
+  }, [intialValue]);
   return (
     <div className="flex flex-col gap-2.5" key={name}>
       <div className="flex items-center justify-between">
         <label htmlFor={name} className="text-xs font-semibold text-black">
           {name}
         </label>
-        <InfoIcon className="text-textGray" />
+        {tooltip && <TooltipInfo title={tooltip} />}
       </div>
 
       <div className="flex items-center justify-start gap-2 fancy-scroll overflow-x-auto overflow-y-hidden">

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import InfoIcon from "./icons/InfoIcon";
+import TooltipInfo from "./TooltipInfo";
 
 const SelectInput = ({
   options,
@@ -7,12 +7,14 @@ const SelectInput = ({
   label,
   placeholder = "اختر...",
   required = false,
+  tooltip
 }: {
   options: { name: string }[];
   name: string;
   label: string;
   placeholder?: string;
   required?: boolean;
+  tooltip?: string;
 }) => {
   const [value, setValue] = useState("");
 
@@ -23,7 +25,7 @@ const SelectInput = ({
           {label}
           {required && <span className="text-[#AE0000]"> *</span>}
         </label>
-        <InfoIcon className="text-textGray" />
+        {tooltip && <TooltipInfo title={tooltip} />}
       </div>
       <div className="flex flex-col gap-3 rounded-lg border border-borderGray py-2 px-4">
         <select

@@ -5,9 +5,11 @@ import PlusIcon from "@/components/icons/PlusIcon";
 import ServiceIcon from "@/components/icons/ServiceIcon";
 import { useState } from "react";
 import Employees from "@/sections/Employees";
+import ConfirmationModal from "@/sections/ConfirmationModal";
 
 export default function EmployeesPage() {
   const [addEmployeeModal, setAddEmployeeModal] = useState(false);
+  const [confirmModal, setConfirmModal] = useState(false);
   return (
     <>
       <main className="flex h-full w-full flex-grow flex-col gap-6 pb-10 text-primary">
@@ -33,7 +35,16 @@ export default function EmployeesPage() {
 
         <Employees />
       </main>
-      <AddEmployeeModal open={addEmployeeModal} setOpen={setAddEmployeeModal} />
+      <AddEmployeeModal
+        open={addEmployeeModal}
+        setOpen={setAddEmployeeModal}
+        onSuccess={() => setConfirmModal(true)}
+      />
+      <ConfirmationModal
+        open={confirmModal}
+        setOpen={setConfirmModal}
+        title="تمت إضافة الموظف بنجاح"
+      />
     </>
   );
 }

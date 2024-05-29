@@ -1,17 +1,30 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const WorkingHoursInput = ({
   name,
   label,
+  intialValue,
+  onChange,
 }: {
   name: string;
   label: string;
   required?: boolean;
+  intialValue?: {
+    from: string;
+    to: string;
+  } | null;
+  onChange?: Function;
 }) => {
-  const [from, setFrom] = useState("");
-  const [to, setTo] = useState("");
-  const [active, setActive] = useState(false);
+  const [from, setFrom] = useState(intialValue?.from || "");
+  const [to, setTo] = useState(intialValue?.to || "");
+  const [active, setActive] = useState(intialValue ? true : false);
+
+  useEffect(() => {
+    if (onChange) {
+      onChange({ from, to, active });
+    }
+  }, [from, to, active]);
 
   return (
     <div className="flex flex-col gap-0.5 text-sm font-bold text-black">
@@ -33,8 +46,8 @@ const WorkingHoursInput = ({
           <p>من</p>
           <div className="flex flex-col gap-3 rounded-lg border border-borderGray px-4 py-2">
             <select
-              id={name}
-              name={name}
+              id={`${name}-from`}
+              name={`${name}-from`}
               className={`bg-transparent text-sm font-semibold ${from == "" ? "text-placeholder" : "text-textGray"} !outline-none`}
               value={from}
               onChange={(e) => setFrom(e.target.value)}
@@ -55,8 +68,8 @@ const WorkingHoursInput = ({
           <p>إلى</p>
           <div className="flex flex-col gap-3 rounded-lg border border-borderGray px-4 py-2">
             <select
-              id={name}
-              name={name}
+              id={`${name}-to`}
+              name={`${name}-to`}
               className={`bg-transparent text-sm font-semibold ${to == "" ? "text-placeholder" : "text-textGray"} !outline-none`}
               value={to}
               onChange={(e) => setTo(e.target.value)}

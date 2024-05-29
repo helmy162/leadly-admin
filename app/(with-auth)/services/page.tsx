@@ -5,9 +5,11 @@ import PlusIcon from "@/components/icons/PlusIcon";
 import ServiceIcon from "@/components/icons/ServiceIcon";
 import Services from "@/sections/Services";
 import { useState } from "react";
+import ConfirmationModal from "@/sections/ConfirmationModal";
 
 export default function ServicesPage() {
   const [addServiceModal, setAddServiceModal] = useState(false);
+  const [confirmModal, setConfirmModal] = useState(false);
   return (
     <main className="flex h-full w-full flex-grow flex-col gap-6 pb-10 text-primary">
       <div className="flex flex-col gap-1">
@@ -32,7 +34,16 @@ export default function ServicesPage() {
 
       <Services />
 
-      <AddServiceModal open={addServiceModal} setOpen={setAddServiceModal} />
+      <AddServiceModal
+        open={addServiceModal}
+        setOpen={setAddServiceModal}
+        onSuccess={() => setConfirmModal(true)}
+      />
+      <ConfirmationModal
+        open={confirmModal}
+        setOpen={setConfirmModal}
+        title="تمت إضافة الخدمة بنجاح"
+      />
     </main>
   );
 }

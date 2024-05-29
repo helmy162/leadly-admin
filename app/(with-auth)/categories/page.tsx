@@ -5,9 +5,11 @@ import PlusIcon from "@/components/icons/PlusIcon";
 import ServiceIcon from "@/components/icons/ServiceIcon";
 import { useState } from "react";
 import Categories from "@/sections/Categories";
+import ConfirmationModal from "@/sections/ConfirmationModal";
 
 export default function CategoriesPage() {
   const [addCategoryModal, setAddCategoryModal] = useState(false);
+  const [confirmModal, setConfirmModal] = useState(false);
   return (
     <main className="flex h-full w-full flex-grow flex-col gap-6 pb-10 text-primary">
       <div className="flex flex-col gap-1">
@@ -32,7 +34,16 @@ export default function CategoriesPage() {
 
       <Categories />
 
-      <AddCategoryModal open={addCategoryModal} setOpen={setAddCategoryModal} />
+      <AddCategoryModal
+        open={addCategoryModal}
+        setOpen={setAddCategoryModal}
+        onSuccess={() => setConfirmModal(true)}
+      />
+      <ConfirmationModal
+        open={confirmModal}
+        setOpen={setConfirmModal}
+        title="تمت إضافة التصنيف بنجاح"
+      />
     </main>
   );
 }

@@ -1,12 +1,26 @@
 "use client";
 import { Draggable } from "@hello-pangea/dnd";
-import DotsIcon from "./icons/DotsIcon";
 import { useState } from "react";
+import DotsMenu from "./DotsMenu";
 
-export default function Category({ id, order }: { id: string; order: number }) {
+export default function Category({
+  data,
+  onEdit,
+  onDelete,
+}: {
+  data: {
+    id: number;
+    order: number;
+    name: string;
+    serviceCount: number;
+  };
+  onEdit: () => void;
+  onDelete: () => void;
+}) {
   const [active, setActive] = useState(true);
+
   return (
-    <Draggable draggableId={id} index={order}>
+    <Draggable draggableId={data.id.toString()} index={data.order}>
       {(provided) => (
         <div
           className="flex flex-col gap-4 rounded-lg border border-[#F1F5F9] py-5"
@@ -14,11 +28,9 @@ export default function Category({ id, order }: { id: string; order: number }) {
           {...provided.draggableProps}
           {...provided.dragHandleProps}
         >
-          <div className="flex items-center justify-between px-4">
-            <h4 className="text-xs font-semibold text-black">
-              العناية بالأظافر {id}
-            </h4>
-            <div className="relative flex h-6 items-center gap-4">
+          <div className="flex datas-center justify-between px-4">
+            <h4 className="text-xs font-semibold text-black">{data.name}</h4>
+            <div className="relative flex h-6 datas-center gap-4">
               <input
                 type="checkbox"
                 className="switch"
@@ -26,17 +38,17 @@ export default function Category({ id, order }: { id: string; order: number }) {
                 onChange={() => setActive(!active)}
               />
               <button className="text-textGray">
-                <DotsIcon />
+                <DotsMenu onDelete={onDelete} onEdit={onEdit} />
               </button>
             </div>
           </div>
           <hr className="border-[#F1F5F9]" />
           <div className="flex flex-col gap-2 px-4">
-            <div className="flex items-center justify-between">
+            <div className="flex datas-center justify-between">
               <h4 className="text-xs font-medium text-textGray">
                 عدد الخدمات المرتبطة{" "}
               </h4>
-              <h5 className="text-xs font-semibold text-black">3 </h5>
+              <h5 className="text-xs font-semibold text-black">{data.serviceCount}</h5>
             </div>
           </div>
         </div>

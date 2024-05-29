@@ -5,8 +5,8 @@ export default function DaysFilter({
   day,
   setDay,
 }: {
-  day: number | null;
-  setDay: React.Dispatch<React.SetStateAction<number | null>>;
+  day: string | null;
+  setDay: React.Dispatch<React.SetStateAction<string | null>>;
 }) {
   // get the next 7 days
   const days = Array.from({ length: 7 }, (_, i) => {
@@ -16,9 +16,15 @@ export default function DaysFilter({
     // day of the week in Arabic
     const day = date.toLocaleDateString("ar-EG", { weekday: "short" });
     const dayNumber = date.getDate();
+
+
+    // Format the date as Day/Month/Year
+    const value = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+
     return {
       day: day,
       number: dayNumber,
+      value: value,
     };
   });
   return (

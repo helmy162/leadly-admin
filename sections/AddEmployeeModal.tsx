@@ -1,16 +1,23 @@
 import CloseIcon from "@/components/icons/CloseIcon";
 import Modal from "@/components/Modal";
 import TextInput from "@/components/TextInput";
-import { Option } from "@/lib/types";
-import { useState } from "react";
 import WorkingHoursInput from "@/components/WorkingHoursInput";
 
 export default function AddEmployeeModal({
   open,
   setOpen,
+  onSuccess,
+  employee,
 }: {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  onSuccess: Function;
+  employee?: {
+    id: string;
+    name: string;
+    days: any;
+  
+  };
 }) {
 
   const handleAddEmployee = (e: React.FormEvent<HTMLFormElement>) => {
@@ -21,6 +28,7 @@ export default function AddEmployeeModal({
     console.log("Employee data:", data); // handle the data here
 
     setOpen(false); // close the modal
+    onSuccess();
   };
 
   return (
@@ -30,7 +38,9 @@ export default function AddEmployeeModal({
         onSubmit={handleAddEmployee}
       >
         <div className="flex w-full items-center justify-between px-4">
-          <h2 className="font-bold text-black">إضافة تصنيف</h2>
+          <h2 className="font-bold text-black">
+            {employee ? "تعديل" : "إضافة"} موظف
+          </h2>
           <button
             type="button"
             onClick={() => setOpen(false)}
@@ -46,6 +56,8 @@ export default function AddEmployeeModal({
             label="اسم الموظف"
             placeholder="اسم الموظف"
             required
+            tooltip="أدخل اسم الموظف هنا"
+            intialValue={employee?.name}
           />
           {
             days.map((day) => (
@@ -53,6 +65,7 @@ export default function AddEmployeeModal({
                 key={day.value}
                 name={day.value}
                 label={day.name}
+                intialValue={employee?.days && day.value in employee?.days! ? employee?.days[day.value as keyof typeof employee.days] : null}
               />
             ))
           }
@@ -63,7 +76,7 @@ export default function AddEmployeeModal({
             type="submit"
             className="h-14 rounded-xl bg-primary p-2 font-bold text-white"
           >
-            إضافة
+            {employee ? "تعديل" : "إضافة"}
           </button>
         </div>
       </form>
@@ -72,13 +85,13 @@ export default function AddEmployeeModal({
 }
 
 const days = [
-  { name: "السبت", value: "saturday" },
-  { name: "الأحد", value: "sunday" },
-  { name: "الإثنين", value: "monday" },
-  { name: "الثلاثاء", value: "tuesday" },
-  { name: "الأربعاء", value: "wednesday" },
-  { name: "الخميس", value: "thursday" },
-  { name: "الجمعة", value: "friday" },
+  { name: "السبت", value: "Saturday" },
+  { name: "الأحد", value: "Sunday" },
+  { name: "الإثنين", value: "Monday" },
+  { name: "الثلاثاء", value: "Tuesday" },
+  { name: "الأربعاء", value: "Wednesday" },
+  { name: "الخميس", value: "Thursday" },
+  { name: "الجمعة", value: "Friday" },
 ];
 
 
