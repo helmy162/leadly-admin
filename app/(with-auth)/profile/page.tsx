@@ -92,9 +92,9 @@ export default function BusinessInfoPage() {
           </div>
 
           <div className="flex flex-col gap-2 rounded-xl bg-white px-4 py-[22px]">
-            <h2 className="text-sm font-bold">الشهادات</h2>
+            <h2 className="text-sm font-bold">التقييمات</h2>
             <Link href="/testimonials" className="text-sm font-medium text-primary">
-              الذهاب إلى الشهادات
+              الذهاب إلى التقييمات
             </Link>
 
           </div>
