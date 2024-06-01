@@ -18,7 +18,7 @@ const TextInput = ({
   placeholder?: string;
   multiline?: boolean;
   required?: boolean;
-  intialValue?: string;
+  intialValue?: string | number;
   tooltip?: string;
   isEnglish?: boolean;
   [key: string]: any;

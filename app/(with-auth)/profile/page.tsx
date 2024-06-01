@@ -9,6 +9,7 @@ import { business } from "@/mockups/business";
 import ConfirmationModal from "@/sections/ConfirmationModal";
 import EditBusinessModal from "@/sections/EditBusinessModal";
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 
 type dayType = {
@@ -89,6 +90,15 @@ export default function BusinessInfoPage() {
               />
             ))}
           </div>
+
+          <div className="flex flex-col gap-2 rounded-xl bg-white px-4 py-[22px]">
+            <h2 className="text-sm font-bold">الشهادات</h2>
+            <Link href="/testimonials" className="text-sm font-medium text-primary">
+              الذهاب إلى الشهادات
+            </Link>
+
+          </div>
+          
         </div>
       </main>
       <EditBusinessModal
