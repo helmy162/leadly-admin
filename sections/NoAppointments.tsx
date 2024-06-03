@@ -2,7 +2,7 @@ export default function NoAppointments() {
   return (
     <div className="flex h-full flex-grow flex-col items-center justify-center">
       <TimeSVG />
-      <h2 className="font-bold text-center text-3xl text-[#D4D9E3]">
+      <h2 className="mt-5 text-center text-3xl text-[#D4D9E3]">
         لا توجد حجوزات اليوم
       </h2>
     </div>
