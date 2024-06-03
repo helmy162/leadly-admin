@@ -4,10 +4,10 @@ export default function TooltipInfo({ title }: { title: string }) {
   return (
     <div className="group relative">
       <InfoIcon className="text-textGray" />
-      <p className="absolute -top-3 left-6 hidden text-nowrap rounded-lg bg-[#EFEFEF]  px-2.5 py-2 text-right text-xs leading-5 group-hover:block">
+      <p className="absolute -top-3 left-6 z-50 hidden text-nowrap rounded-lg bg-[#EFEFEF]  px-2.5 py-2 text-right text-xs leading-5 group-hover:block">
         {title}
       </p>
-      <Tip className="absolute top-0 left-4 hidden text-[#EFEFEF]  group-hover:block" />
+      <Tip className="absolute left-4 top-0 z-40 hidden  text-[#EFEFEF] group-hover:block" />
     </div>
   );
 }
