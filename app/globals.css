@@ -68,3 +68,11 @@
   @apply disabled:cursor-not-allowed disabled:after:bg-opacity-75;
   @apply disabled:checked:before:bg-opacity-40;
 }
+
+/* Input Color Type */
+input[type="color"] {
+  @apply px-0.5 py-0;
+}
+input[type="color"]::-webkit-color-swatch {
+  border-radius: 4px;
+}

@@ -79,6 +79,7 @@ export default function EditBusinessModal({
           <ImagesUpload name="معرض الصور" tooltip="أدخل صور المنشأة هنا" intialValue={data.gallery} />
 
           <TextInput
+            type="color"
             name="brandColor"
             label="لون الهوية"
             placeholder="#353433"
