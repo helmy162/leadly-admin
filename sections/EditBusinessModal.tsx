@@ -9,15 +9,18 @@ export default function EditBusinessModal({
   open,
   setOpen,
   onSuccess,
-  data
+  data,
 }: {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   onSuccess: Function;
   data: {
     name: string;
+    website_title: string;
+    short_description: string;
     description: string;
-    brandColor: string;
+    primary_color: string;
+    secondary_color: string;
     logo: string;
     gallery: string[];
     address: string;
@@ -26,6 +29,7 @@ export default function EditBusinessModal({
     whatsapp: string;
     instagram: string;
     snapchat: string;
+    tiktok: string;
   };
 }) {
   const handleEditBusiness = (e: React.FormEvent<HTMLFormElement>) => {
@@ -66,28 +70,67 @@ export default function EditBusinessModal({
             intialValue={data.name}
           />
           <TextInput
+            name="website_title"
+            label="اسم الموقع"
+            placeholder="اسم الموقع"
+            required
+            tooltip="أدخل اسم الموقع هنا"
+            intialValue={data.website_title}
+          />
+
+          <TextInput
             name="description"
-            label="وصف مختصر"
-            placeholder="وصف مختصر عن المنشأة"
+            label="وصف المنشأة"
+            placeholder="وصف المنشأة"
             multiline
             tooltip="أدخل وصف المنشأة هنا"
             intialValue={data.description}
           />
 
-          <ImageUpload name="شعار المنشأة" tooltip="أدخل شعار المنشأة هنا" intialValue={data.logo} />
-
-          <ImagesUpload name="معرض الصور" tooltip="أدخل صور المنشأة هنا" intialValue={data.gallery} />
-
           <TextInput
-            type="color"
-            name="brandColor"
-            label="لون الهوية"
-            placeholder="#353433"
-            tooltip="اختر لون الهوية"
-            required
-            isEnglish
-            intialValue={data.brandColor}
+            name="short_description"
+            label="وصف مختصر"
+            placeholder="وصف مختصر عن المنشأة"
+            multiline
+            tooltip="أدخل وصف مختصر عن المنشأة هنا"
+            intialValue={data.short_description}
           />
+
+          <ImageUpload
+            name="شعار المنشأة"
+            tooltip="أدخل شعار المنشأة هنا"
+            intialValue={data.logo}
+          />
+
+          <ImagesUpload
+            name="معرض الصور"
+            tooltip="أدخل صور المنشأة هنا"
+            intialValue={data.gallery}
+          />
+
+          <div className="flex w-full items-center gap-4 [&>*]:w-full">
+            <TextInput
+              type="color"
+              name="primary_color"
+              label="لون الهوية الأساسي"
+              placeholder="#353433"
+              tooltip="اختر لون الهوية الأساسي"
+              required
+              isEnglish
+              intialValue={data.primary_color}
+            />
+
+            <TextInput
+              type="color"
+              name="secondary_color"
+              label="لون الهوية الثانوي"
+              placeholder="#353433"
+              tooltip="اختر لون الهوية الثانوي"
+              required
+              isEnglish
+              intialValue={data.secondary_color}
+            />
+          </div>
 
           <TextInput
             name="address"
@@ -104,6 +147,7 @@ export default function EditBusinessModal({
             placeholder="رابط خرائط جوجل"
             tooltip="أدخل رابط خرائط جوجل هنا"
             type="url"
+            required
             intialValue={data.googleMapsLink}
             isEnglish
           />
@@ -120,10 +164,10 @@ export default function EditBusinessModal({
 
           <TextInput
             name="whatsapp"
-            label="رقم الواتس اب"
-            placeholder="رقم الواتس اب"
-            tooltip="أدخل رقم الواتس اب هنا"
-            type="tel"
+            label="رابط الواتس اب"
+            placeholder="رابط الواتس اب"
+            tooltip="أدخل رابط الواتس اب هنا"
+            type="url"
             intialValue={data.whatsapp}
             isEnglish
           />
@@ -147,6 +191,17 @@ export default function EditBusinessModal({
             intialValue={data.snapchat}
             isEnglish
           />
+
+          <TextInput
+            name="tiktok"
+            label="رابط تيك توك"
+            placeholder="رابط تيك توك"
+            tooltip="أدخل رابط تيك توك هنا"
+            type="url"
+            intialValue={data.tiktok}
+            isEnglish
+          />
+
         </div>
 
         <div className="mt-3 flex items-center justify-between gap-4 px-4 [&>*]:flex-grow">
