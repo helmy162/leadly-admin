@@ -6,6 +6,7 @@ import ServiceIcon from "@/components/icons/ServiceIcon";
 import { useState } from "react";
 import Categories from "@/sections/Categories";
 import ConfirmationModal from "@/sections/ConfirmationModal";
+import Alert from "@/components/Alert";
 
 export default function CategoriesPage() {
   const [addCategoryModal, setAddCategoryModal] = useState(false);
@@ -31,6 +32,8 @@ export default function CategoriesPage() {
           <ServiceIcon width={24} height={24} />
         </button>
       </div>
+
+      <Alert message="بإمكانك تحريك البطاقات عبر الحمل والتحريك لتغيير الترتيب" type="warning" />
 
       <Categories />
 

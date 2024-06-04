@@ -3,50 +3,50 @@ import React from "react";
 export default function CalendarIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
-      width="19"
-      height="20"
-      viewBox="0 0 19 20"
+      width="25"
+      height="24"
+      viewBox="0 0 25 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
       <path
-        d="M15.5 3H3.5C2.39543 3 1.5 3.89543 1.5 5V17C1.5 18.1046 2.39543 19 3.5 19H15.5C16.6046 19 17.5 18.1046 17.5 17V5C17.5 3.89543 16.6046 3 15.5 3Z"
+        d="M18.5 5H6.5C5.39543 5 4.5 5.89543 4.5 7V19C4.5 20.1046 5.39543 21 6.5 21H18.5C19.6046 21 20.5 20.1046 20.5 19V7C20.5 5.89543 19.6046 5 18.5 5Z"
         stroke="currentColor"
         strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
-        d="M13.5 1V5"
+        d="M16.5 3V7"
         stroke="currentColor"
         strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
-        d="M5.5 1V5"
+        d="M8.5 3V7"
         stroke="currentColor"
         strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
-        d="M1.5 9H17.5"
+        d="M4.5 11H20.5"
         stroke="currentColor"
         strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
-        d="M8.5 13H9.5"
+        d="M11.5 15H12.5"
         stroke="currentColor"
         strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
-        d="M9.5 13V16"
+        d="M12.5 15V18"
         stroke="currentColor"
         strokeWidth="1.5"
         strokeLinecap="round"

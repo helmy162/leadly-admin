@@ -2,13 +2,13 @@ import FixedMenuItem from "@/components/FixedMenuItem";
 import AccountIcon from "@/components/icons/AccountIcon";
 import CalendarIcon from "@/components/icons/CalendarIcon";
 import DashboardIcon from "@/components/icons/DashboardIcon";
+import HomeIcon from "@/components/icons/HomeIcon";
 import ServiceIcon from "@/components/icons/ServiceIcon";
-import SettingsIcon from "@/components/icons/SettingsIcon";
 
 export default function FixedMenu() {
   return (
     <div className="fixed inset-x-0 bottom-6 mx-auto w-full max-w-[430px] px-4">
-      <div className=" mx-auto flex min-h-12 w-full items-center justify-between rounded-xl bg-primary px-7 py-2 text-white">
+      <div className=" mx-auto flex min-h-14 w-full items-center justify-between rounded-xl bg-primary px-7 py-2 text-white">
         {menu.map((item, index) => (
           <FixedMenuItem key={index} {...item} />
         ))}
@@ -26,27 +26,27 @@ export function BlurryBackground() {
 
 const menu = [
   {
-    name: "Employees",
+    name: "الإعدادات",
+    href: "/profile",
+    icon: <HomeIcon />,
+  },
+  {
+    name: "الفريق",
     href: "/employees",
     icon: <AccountIcon />,
   },
   {
-    name: "Profile",
-    href: "/profile",
-    icon: <SettingsIcon />,
-  },
-  {
-    name: "Home",
+    name: "الحجوزات",
     href: "/",
     icon: <CalendarIcon />,
   },
   {
-    name: "Services",
+    name: "الخدمات",
     href: "/services",
     icon: <ServiceIcon />,
   },
   {
-    name: "Categories",
+    name: "التصنيفات",
     href: "/categories",
     icon: <DashboardIcon />,
   },

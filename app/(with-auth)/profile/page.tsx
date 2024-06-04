@@ -127,7 +127,7 @@ const info = [
   },
   {
     value: "September 24, 2017",
-    icon: <CalendarIcon className="text-[#94A3B8]" width={16} height={18} />,
+    icon: <CalendarIcon className="text-[#94A3B8]" width={24} height={24} />,
   },
   {
     value: "dribbble.com/Angela",

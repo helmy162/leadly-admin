@@ -9,6 +9,7 @@ export const appointments = [
       date: "30/5/2024",
       phoneNumber: "0551234567",
       employees: ["محمد", "علي"],
+      status: "confirmed",
     },
     {
       id: 2,
@@ -18,6 +19,7 @@ export const appointments = [
       date: "31/5/2024",
       phoneNumber: "0552345678",
       employees: ["عمر", "عبدالله"],
+      status: "pending",
     },
     {
       id: 3,
@@ -27,6 +29,7 @@ export const appointments = [
       date: "30/5/2024",
       phoneNumber: "0553456789",
       employees: ["محمد", "علي"],
+      status: "confirmed",
     },
     {
       id: 4,
@@ -36,6 +39,7 @@ export const appointments = [
       date: "30/5/2024",
       phoneNumber: "0554567890",
       employees: ["عمر", "عبدالله"],
+      status: "cancelled",
     },
     {
       id: 5,
@@ -45,6 +49,7 @@ export const appointments = [
       date: "31/5/2024",
       phoneNumber: "0555678901",
       employees: ["محمد", "علي"],
+      status: "pending",
     },
     {
       id: 6,
@@ -54,6 +59,7 @@ export const appointments = [
       date: "31/5/2024",
       phoneNumber: "0556789012",
       employees: ["عمر", "عبدالله"],
+      status: "confirmed",
     },
     {
       id: 7,
@@ -63,6 +69,7 @@ export const appointments = [
       date: "1/6/2024",
       phoneNumber: "0557890123",
       employees: ["محمد", "علي"],
+      status: "pending",
     },
     {
       id: 8,
@@ -72,6 +79,7 @@ export const appointments = [
       date: "1/6/2024",
       phoneNumber: "0558901234",
       employees: ["عمر", "عبدالله"],
+      status: "confirmed",
     },
     {
       id: 9,
@@ -81,6 +89,7 @@ export const appointments = [
       date: "2/6/2024",
       phoneNumber: "0559012345",
       employees: ["محمد", "علي"],
+      status: "pending",
     },
     {
       id: 10,
@@ -90,6 +99,7 @@ export const appointments = [
       date: "2/6/2024",
       phoneNumber: "0560123456",
       employees: ["عمر", "عبدالله"],
+      status: "confirmed",
     },
     {
       id: 11,
@@ -99,6 +109,7 @@ export const appointments = [
       date: "3/6/2024",
       phoneNumber: "0561234567",
       employees: ["محمد", "علي"],
+      status: "pending",
     },
     {
       id: 12,
@@ -106,7 +117,8 @@ export const appointments = [
       services: ["علاج الكيراتين", "تسريح الشعر"],
       time: "8am",
       date: "3/6/2024",
-      phoneNumber: "0562345678"
+      phoneNumber: "0562345678",
+      status: "confirmed",
     },
     {
       id: 13,
@@ -114,7 +126,9 @@ export const appointments = [
       services: ["تلوين الأظافر", "علاج الأظافر"],
       time: "6pm",
       date: "4/6/2024",
-      phoneNumber: "0563456789"
+      phoneNumber: "0563456789",
+      employees: ["عمر", "عبدالله"],
+      status: "pending",
     },
     {
       id: 14,
@@ -122,7 +136,9 @@ export const appointments = [
       services: ["حلاقة", "تسريحة"],
       time: "11am",
       date: "4/6/2024",
-      phoneNumber: "0564567890"
+      phoneNumber: "0564567890",
+      employees: ["محمد", "علي"],
+      status: "confirmed",
     },
     {
       id: 15,
@@ -130,7 +146,9 @@ export const appointments = [
       services: ["علاج البشرة", "تبييض الأسنان"],
       time: "4pm",
       date: "5/6/2024",
-      phoneNumber: "0565678901"
+      phoneNumber: "0565678901",
+      employees: ["عمر", "عبدالله"],
+      status: "pending",
     },
     {
       id: 16,
@@ -138,7 +156,9 @@ export const appointments = [
       services: ["مساج", "تقشير الجسم"],
       time: "9am",
       date: "5/6/2024",
-      phoneNumber: "0566789012"
+      phoneNumber: "0566789012",
+      employees: ["محمد", "علي"],
+      status: "confirmed",
     },
     {
       id: 17,
@@ -146,7 +166,9 @@ export const appointments = [
       services: ["تنظيف الوجه", "ماسك"],
       time: "2pm",
       date: "6/6/2024",
-      phoneNumber: "0567890123"
+      phoneNumber: "0567890123",
+      employees: ["عمر", "عبدالله"],
+      status: "pending",
     },
     {
       id: 18,
@@ -154,7 +176,9 @@ export const appointments = [
       services: ["صبغ الشعر", "قص الشعر"],
       time: "10am",
       date: "6/6/2024",
-      phoneNumber: "0568901234"
+      phoneNumber: "0568901234",
+      employees: ["محمد", "علي"],
+      status: "confirmed",
     },
     {
       id: 19,
@@ -162,7 +186,9 @@ export const appointments = [
       services: ["تصفيف الشعر", "علاج الشعر"],
       time: "5pm",
       date: "7/6/2024",
-      phoneNumber: "0569012345"
+      phoneNumber: "0569012345",
+      employees: ["عمر", "عبدالله"],
+      status: "pending",
     },
     {
       id: 20,
@@ -170,7 +196,9 @@ export const appointments = [
       services: ["علاج الأظافر", "طلاء الأظافر"],
       time: "8pm",
       date: "7/6/2024",
-      phoneNumber: "0570123456"
+      phoneNumber: "0570123456",
+      employees: ["محمد", "علي"],
+      status: "confirmed",
     }
   ];
   

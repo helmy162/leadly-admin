@@ -24,7 +24,7 @@ export default function DotsMenu({
     };
   }, [isOpen]);
   return (
-    <div className="relative" ref={menuRef}>
+    <div className="relative flex items-center justify-center" ref={menuRef}>
       <button onClick={() => setIsOpen((prev) => !prev)}>
         <DotsIcon className="text-textGray" />
       </button>

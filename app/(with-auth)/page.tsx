@@ -10,7 +10,8 @@ import ConfirmationModal from "@/sections/ConfirmationModal";
 import { appointments } from "@/mockups/appointments";
 import FilterMenu from "@/components/FilterMenu";
 import { employees } from "@/mockups/employees";
-import { services } from "@/mockups/services";
+// import { services } from "@/mockups/services";
+import { statuses } from "@/mockups/statuses";
 
 export default function Home() {
   const [day, setDay] = useState<string | null>(null);
@@ -18,7 +19,8 @@ export default function Home() {
   const [confirmModal, setConfirmModal] = useState(false);
 
   const [employeesFilter, setEmployeesFilter] = useState<string>("");
-  const [servicesFilter, setServicesFilter] = useState<string>("");
+  // const [servicesFilter, setServicesFilter] = useState<string>("");
+  const [statusFilter, setStatusFilter] = useState<string>("");
 
   const [filteredAppointments, setFilteredAppointments] =
     useState(appointments);
@@ -42,14 +44,22 @@ export default function Home() {
       );
     }
 
-    if (servicesFilter) {
-      filtered = filtered.filter((appointment) =>
-        appointment.services?.includes(servicesFilter),
+    // if (servicesFilter) {
+    //   filtered = filtered.filter((appointment) =>
+    //     appointment.services?.includes(servicesFilter),
+    //   );
+    // }
+
+    if (statusFilter) {
+      const statusValue = statuses.find((s) => s.name == statusFilter)?.value;
+      console.log(statusValue);
+      filtered = filtered.filter(
+        (appointment) => appointment.status == statusValue,
       );
     }
 
     setFilteredAppointments(filtered);
-  }, [day, employeesFilter, servicesFilter]);
+  }, [day, employeesFilter, statusFilter]);
 
   // get today's date
   const fullDate = new Date();
@@ -98,10 +108,15 @@ export default function Home() {
           options={employees.map((e) => e.name)}
           onChange={setEmployeesFilter}
         />
-        <FilterMenu
+        {/* <FilterMenu
           name="الخدمات"
           options={services.map((s) => s.name)}
           onChange={setServicesFilter}
+        /> */}
+        <FilterMenu
+          name="حالات الحجز"
+          options={statuses.map((s) => s.name)}
+          onChange={setStatusFilter}
         />
       </div>
 

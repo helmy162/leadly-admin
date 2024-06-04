@@ -16,10 +16,13 @@ export default function FixedMenuItem({
   const isActive = pathname === href;
 
   return (
-    <Link href={href} className="relative size-6 flex items-center justify-center">
+    <Link href={href} className="relative flex flex-col items-center justify-center  size-[44px]">
       {icon}
+      <h2 className="text-[10px] text-white font-medium">
+        {name}
+      </h2>
       {isActive && (
-        <div className="-bottom-1 bg-darkBlue absolute h-1 w-full rounded-xl" />
+        <div className="-bottom-1 bg-darkBlue absolute h-1 w-6 rounded-xl" />
       )}
     </Link>
   );
