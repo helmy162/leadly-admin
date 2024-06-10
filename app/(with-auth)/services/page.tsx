@@ -4,12 +4,34 @@ import AddServiceModal from "@/sections/AddServiceModal";
 import PlusIcon from "@/components/icons/PlusIcon";
 import ServiceIcon from "@/components/icons/ServiceIcon";
 import Services from "@/sections/Services";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ConfirmationModal from "@/sections/ConfirmationModal";
+import FilterMenu from "@/components/FilterMenu";
+import { ALL_CATEGORIES } from "@/mockups/categories";
+import { services } from "@/mockups/services";
+import Empty from "@/sections/Empty";
 
 export default function ServicesPage() {
   const [addServiceModal, setAddServiceModal] = useState(false);
   const [confirmModal, setConfirmModal] = useState(false);
+  const [categoryFilter, setCategoryFilter] = useState<string>("");
+  const [filteredServices, setFilteredServices] = useState(services);
+
+  useEffect(() => {
+    console.log("categoryFilter", categoryFilter);
+    let filtered = services;
+
+    if (categoryFilter) {
+      filtered = filtered.filter((service) =>
+        service.categories?.includes(categoryFilter),
+      );
+    }
+
+    setFilteredServices(filtered);
+  }, [categoryFilter]);
+
+  const hasServices = filteredServices.length > 0;
+
   return (
     <main className="flex h-full w-full flex-grow flex-col gap-6 pb-10 text-primary">
       <div className="flex flex-col gap-1">
@@ -17,7 +39,7 @@ export default function ServicesPage() {
         <h2 className="text-xs text-textGray">تحكم بالخدمات وأسعارها</h2>
       </div>
 
-      <div className="flex items-center justify-between gap-[76px]">
+      <div className="flex items-center justify-between gap-5">
         <button
           type="button"
           onClick={() => setAddServiceModal(true)}
@@ -27,12 +49,18 @@ export default function ServicesPage() {
           إضافة خدمة
         </button>
 
-        <button className="rounded-xl bg-white p-3 text-primary">
-          <ServiceIcon width={24} height={24} />
-        </button>
+        <FilterMenu
+          name="التصنيفات"
+          options={ALL_CATEGORIES.map((e) => e.name)}
+          onChange={setCategoryFilter}
+        />
       </div>
 
-      <Services />
+      {hasServices ? (
+        <Services services={filteredServices} />
+      ) : (
+        <Empty message="لا توجد خدمات" />
+      )}
 
       <AddServiceModal
         open={addServiceModal}

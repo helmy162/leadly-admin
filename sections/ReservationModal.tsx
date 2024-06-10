@@ -8,18 +8,21 @@ import { services } from "@/mockups/services";
 import { Option } from "@/lib/types";
 import DatePicker from "@/components/DatePicker";
 import { useEffect, useState } from "react";
+import { times } from "@/mockups/times";
+import { employees } from "@/mockups/employees";
 
 export default function ReservationModal({
   open,
   setOpen,
   appointment,
-  onSuccess
+  onSuccess,
 }: {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   appointment?: {
     clientName: string;
     services: string[];
+    employees: string[];
     time: string;
     date: string;
     phoneNumber: string;
@@ -27,6 +30,7 @@ export default function ReservationModal({
   onSuccess: Function;
 }) {
   const [reservedServices, setReservedServices] = useState<Option[]>([]);
+  const [selectedEmployees, setSelectedEmployees] = useState<Option[]>([]);
   const handleReservation = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
@@ -54,6 +58,16 @@ export default function ReservationModal({
             value: service.name,
           })),
       );
+
+      // Set the initial employee by filtering "all" employees array
+      setSelectedEmployees(
+        employees
+          .filter((employee) => appointment.employees.includes(employee.name))
+          .map((employee) => ({
+            label: employee.name,
+            value: employee.name,
+          })),
+      );
     }
   }, [appointment]);
   return (
@@ -63,7 +77,9 @@ export default function ReservationModal({
         onSubmit={handleReservation}
       >
         <div className="flex w-full items-center justify-between">
-          <h2 className="text-2xl font-bold text-black">{appointment ? "تعديل" : "حجز"} موعد</h2>
+          <h2 className="text-2xl font-bold text-black">
+            {appointment ? "تعديل" : "حجز"} موعد
+          </h2>
           <CloseIcon
             onClick={() => setOpen(false)}
             width={24}
@@ -78,6 +94,14 @@ export default function ReservationModal({
           value={reservedServices}
           setValue={setReservedServices}
           tooltip="اختر الخدمات المناسبة للمستخدم"
+        />
+        <MultiSelectInput
+          name="doctor"
+          label="الدكتور"
+          options={employees}
+          value={selectedEmployees}
+          setValue={setSelectedEmployees}
+          tooltip="اختر الدكاترة المختصين بالخدمة"
         />
         <TextInput
           name="name"
@@ -96,9 +120,9 @@ export default function ReservationModal({
         />
         <DatePicker intialValue={appointment?.date} />
         <SelectInput
-          name="period"
-          label="الفترة"
-          options={periods}
+          name="time"
+          label="الوقت"
+          options={times.map((time) => ({ name: time }))}
           placeholder={appointment?.time}
           tooltip="اختر الفترة المناسبة للمستخدم"
         />

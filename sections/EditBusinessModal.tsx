@@ -73,9 +73,12 @@ export default function EditBusinessModal({
             name="website_title"
             label="اسم الموقع"
             placeholder="اسم الموقع"
-            required
+            disabled
             tooltip="أدخل اسم الموقع هنا"
             intialValue={data.website_title}
+            style={{
+              cursor: "not-allowed",
+            }}
           />
 
           <TextInput

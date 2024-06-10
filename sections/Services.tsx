@@ -1,12 +1,11 @@
 import Service from "@/components/Service";
-import { services } from "@/mockups/services";
 import { DragDropContext, Droppable } from "@hello-pangea/dnd";
 import { useState } from "react";
 import AddServiceModal from "./AddServiceModal";
 import ConfirmationModal from "./ConfirmationModal";
 import DeleteModal from "./DeleteModal";
 
-export default function Services() {
+export default function Services({services}: {services: any[]}) {
   function handleReorder({ destination, source, draggableId }: any) {
     const draggeServiceID = draggableId;
     const currentOrder = source.index;

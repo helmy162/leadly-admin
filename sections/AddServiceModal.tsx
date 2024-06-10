@@ -84,10 +84,24 @@ export default function AddServiceModal({
         </div>
         <hr className="border-[#F1F5F9]" />
         <div className="px-4">
-          <Step1 categories={categories} setCategories={setCategories} service={service} show={step == 1} />
-          <Step2 service={service} show={step == 2}/>
-          <Step3 hasDefinedPractitioner={hasDefinedPractitioner} setHasDefinedPractitioner={setHasDefinedPractitioner} show={step == 3}/>
-          <Step4 practitioners={practitioners} setPractitioners={setPractitioners} service={service} show={step == 4}/>
+          <Step1
+            categories={categories}
+            setCategories={setCategories}
+            service={service}
+            show={step == 1}
+          />
+          <Step2 service={service} show={step == 2} />
+          <Step3
+            hasDefinedPractitioner={hasDefinedPractitioner}
+            setHasDefinedPractitioner={setHasDefinedPractitioner}
+            show={step == 3}
+          />
+          <Step4
+            practitioners={practitioners}
+            setPractitioners={setPractitioners}
+            service={service}
+            show={step == 4}
+          />
         </div>
 
         <div className="mt-3 flex items-center justify-between gap-4 px-4 [&>*]:flex-grow">
@@ -129,7 +143,7 @@ function Step1({
   categories,
   setCategories,
   service,
-  show
+  show,
 }: {
   categories: Option[];
   setCategories: React.Dispatch<React.SetStateAction<Option[]>>;
@@ -192,17 +206,30 @@ function Step1({
   );
 }
 
-function Step2({ service, show }: { service?: (typeof services)[0], show: boolean}) {
+function Step2({
+  service,
+  show,
+}: {
+  service?: (typeof services)[0];
+  show: boolean;
+}) {
   return (
-    <div className={`${show ? "flex" : "hidden"} flex-col gap-6`}>
-      {days.map((day) => (
-        <WorkingHoursInput
-          key={day.value}
-          name={day.value}
-          label={day.name}
-          intialValue={service?.days && day.value in service?.days! ? service?.days[day.value as keyof typeof service.days] : null}
-        />
-      ))}
+    <div className="flex flex-col gap-4">
+      <h2 className="text-base font-bold">أضف جدول العمل لهذه الخدمة</h2>
+      <div className={`${show ? "flex" : "hidden"} flex-col gap-6`}>
+        {days.map((day) => (
+          <WorkingHoursInput
+            key={day.value}
+            name={day.value}
+            label={day.name}
+            intialValue={
+              service?.days && day.value in service?.days!
+                ? service?.days[day.value as keyof typeof service.days]
+                : null
+            }
+          />
+        ))}
+      </div>
     </div>
   );
 }
@@ -210,7 +237,7 @@ function Step2({ service, show }: { service?: (typeof services)[0], show: boolea
 function Step3({
   hasDefinedPractitioner,
   setHasDefinedPractitioner,
-  show
+  show,
 }: {
   hasDefinedPractitioner: boolean;
   setHasDefinedPractitioner: React.Dispatch<React.SetStateAction<boolean>>;
@@ -253,7 +280,7 @@ function Step4({
   practitioners,
   setPractitioners,
   service,
-  show
+  show,
 }: {
   practitioners: Option[];
   setPractitioners: React.Dispatch<React.SetStateAction<Option[]>>;
@@ -285,7 +312,9 @@ function Step4({
         options={ALL_CATEGORIES}
         name="min_hours_before_booking"
         label="أقل مدة قبل الحجز (أيام/ساعات)"
-        placeholder={service ? service.minimumDaysBeforeReservation.toString() : "اختر..."}
+        placeholder={
+          service ? service.minimumDaysBeforeReservation.toString() : "اختر..."
+        }
         required
         tooltip="اختر أقل مدة قبل الحجز هنا"
       />
@@ -293,7 +322,9 @@ function Step4({
         options={ALL_CATEGORIES}
         name="min_days_before_booking"
         label="أقل مدة قبل الحجز"
-        placeholder={service ? service.minimumDaysBeforeReservation.toString() : "اختر..."}
+        placeholder={
+          service ? service.minimumDaysBeforeReservation.toString() : "اختر..."
+        }
         required
         tooltip="اختر أقل مدة قبل الحجز هنا"
       />

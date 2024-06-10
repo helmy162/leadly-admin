@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Appointments from "@/sections/Appointments";
 import { arabic_font, english_font } from "@/fonts";
 import PlusIcon from "@/components/icons/PlusIcon";
-import NoAppointments from "@/sections/NoAppointments";
+import Empty from "@/sections/Empty";
 import ReservationModal from "@/sections/ReservationModal";
 import ConfirmationModal from "@/sections/ConfirmationModal";
 import { appointments } from "@/mockups/appointments";
@@ -186,7 +186,7 @@ export default function Home() {
       {hasAppointments ? (
         <Appointments appointments={filteredAppointments} />
       ) : (
-        <NoAppointments />
+        <Empty message="لا توجد حجوزات" />
       )}
 
       <ReservationModal

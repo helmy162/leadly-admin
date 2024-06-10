@@ -65,7 +65,7 @@ export default function Service({
               <h5
                 className={`${english_font.className} text-left text-xs font-semibold text-black`}
               >
-                <bdi>{data.price} sr</bdi>
+                <bdi>{data.price} SAR</bdi>
               </h5>
             </div>
           </div>

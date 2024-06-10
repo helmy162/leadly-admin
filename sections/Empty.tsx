@@ -1,9 +1,9 @@
-export default function NoAppointments() {
+export default function Empty({message} : {message: string}) {
   return (
     <div className="flex h-full flex-grow flex-col items-center justify-center">
       <TimeSVG />
       <h2 className="mt-5 text-center text-3xl text-[#D4D9E3]">
-        لا توجد حجوزات اليوم
+        {message}
       </h2>
     </div>
   );
