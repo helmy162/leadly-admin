@@ -4,6 +4,8 @@ export const business = {
   description: "عيادات طبية متخصصة في طب الأطفال والأسرة",
   short_description: "lifeway",
   logo: "https://via.placeholder.com/150",
+  gallery_name: "أحدث العروض",
+  gallery_description: "معرض الصور المتحرك",
   gallery: [
     "https://via.placeholder.com/150",
     "https://via.placeholder.com/150",

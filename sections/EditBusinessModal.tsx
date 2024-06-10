@@ -4,15 +4,17 @@ import ImageUpload from "@/components/ImageUpload";
 import Modal from "@/components/Modal";
 import TextInput from "@/components/TextInput";
 import WorkingHoursInput from "@/components/WorkingHoursInput";
+import { business_options } from "@/mockups/business_options";
 
 export default function EditBusinessModal({
   open,
   setOpen,
   onSuccess,
   data,
+  step,
 }: {
   open: boolean;
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setOpen: React.Dispatch<React.SetStateAction<any>>;
   onSuccess: Function;
   data: {
     name: string;
@@ -22,6 +24,8 @@ export default function EditBusinessModal({
     primary_color: string;
     secondary_color: string;
     logo: string;
+    gallery_name: string;
+    gallery_description: string;
     gallery: string[];
     address: string;
     googleMapsLink: string;
@@ -31,6 +35,7 @@ export default function EditBusinessModal({
     snapchat: string;
     tiktok: string;
   };
+  step: number;
 }) {
   const handleEditBusiness = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -50,7 +55,9 @@ export default function EditBusinessModal({
         onSubmit={handleEditBusiness}
       >
         <div className="flex w-full items-center justify-between px-4">
-          <h2 className="font-bold text-black">إضافة تصنيف</h2>
+          <h2 className="font-bold text-black">
+            {business_options.find((o) => o.step == step)?.name}
+          </h2>
           <button
             type="button"
             onClick={() => setOpen(false)}
@@ -61,150 +68,180 @@ export default function EditBusinessModal({
         </div>
         <hr className="border-[#F1F5F9]" />
         <div className="flex flex-col gap-6 px-4">
-          <TextInput
-            name="name"
-            label="اسم المنشأة"
-            placeholder="عيادات/صالون...."
-            required
-            tooltip="أدخل اسم المنشأة هنا"
-            intialValue={data.name}
-          />
-          <TextInput
-            name="website_title"
-            label="اسم الموقع"
-            placeholder="اسم الموقع"
-            disabled
-            tooltip="أدخل اسم الموقع هنا"
-            intialValue={data.website_title}
-            style={{
-              cursor: "not-allowed",
-            }}
-          />
+          {step == 1 && (
+            <>
+              <ImageUpload
+                name="شعار المنشأة"
+                tooltip="أدخل شعار المنشأة هنا"
+                intialValue={data.logo}
+              />
+              <div className="flex w-full items-center gap-4 [&>*]:w-full">
+                <TextInput
+                  type="color"
+                  name="primary_color"
+                  label="لون الهوية الأساسي"
+                  placeholder="#353433"
+                  tooltip="اختر لون الهوية الأساسي"
+                  required
+                  isEnglish
+                  intialValue={data.primary_color}
+                />
 
-          <TextInput
-            name="description"
-            label="وصف المنشأة"
-            placeholder="وصف المنشأة"
-            multiline
-            tooltip="أدخل وصف المنشأة هنا"
-            intialValue={data.description}
-          />
+                <TextInput
+                  type="color"
+                  name="secondary_color"
+                  label="لون الهوية الثانوي"
+                  placeholder="#353433"
+                  tooltip="اختر لون الهوية الثانوي"
+                  required
+                  isEnglish
+                  intialValue={data.secondary_color}
+                />
+              </div>
+            </>
+          )}
 
-          <TextInput
-            name="short_description"
-            label="وصف مختصر"
-            placeholder="وصف مختصر عن المنشأة"
-            multiline
-            tooltip="أدخل وصف مختصر عن المنشأة هنا"
-            intialValue={data.short_description}
-          />
+          {step == 2 && (
+            <>
+              <TextInput
+                name="name"
+                label="اسم المنشأة"
+                placeholder="عيادات/صالون...."
+                required
+                tooltip="أدخل اسم المنشأة هنا"
+                intialValue={data.name}
+              />
+              <TextInput
+                name="website_title"
+                label="اسم الموقع"
+                placeholder="اسم الموقع"
+                disabled
+                tooltip="أدخل اسم الموقع هنا"
+                intialValue={data.website_title}
+                style={{
+                  cursor: "not-allowed",
+                }}
+              />
 
-          <ImageUpload
-            name="شعار المنشأة"
-            tooltip="أدخل شعار المنشأة هنا"
-            intialValue={data.logo}
-          />
+              <TextInput
+                name="description"
+                label="وصف المنشأة"
+                placeholder="وصف المنشأة"
+                multiline
+                tooltip="أدخل وصف المنشأة هنا"
+                intialValue={data.description}
+              />
 
-          <ImagesUpload
-            name="معرض الصور"
-            tooltip="أدخل صور المنشأة هنا"
-            intialValue={data.gallery}
-          />
+              <TextInput
+                name="short_description"
+                label="وصف مختصر"
+                placeholder="وصف مختصر عن المنشأة"
+                multiline
+                tooltip="أدخل وصف مختصر عن المنشأة هنا"
+                intialValue={data.short_description}
+              />
+            </>
+          )}
 
-          <div className="flex w-full items-center gap-4 [&>*]:w-full">
-            <TextInput
-              type="color"
-              name="primary_color"
-              label="لون الهوية الأساسي"
-              placeholder="#353433"
-              tooltip="اختر لون الهوية الأساسي"
-              required
-              isEnglish
-              intialValue={data.primary_color}
-            />
+          {step == 3 && (
+            <>
+              <TextInput
+                name="gallery_name"
+                label="عنوان القسم"
+                placeholder="أحدث العروض..."
+                required
+                tooltip="أدخل عنوان القسم هنا"
+                intialValue={data.gallery_name}
+              />
+              <TextInput
+                name="gallery_description"
+                label="وصف القسم"
+                placeholder="وصف مختصر 10 كلمات"
+                multiline
+                tooltip="أدخل وصف القسم هنا"
+                intialValue={data.gallery_description}
+              />
+              <ImagesUpload
+                name="معرض الصور"
+                tooltip="أدخل صور المنشأة هنا"
+                intialValue={data.gallery}
+              />
+            </>
+          )}
 
-            <TextInput
-              type="color"
-              name="secondary_color"
-              label="لون الهوية الثانوي"
-              placeholder="#353433"
-              tooltip="اختر لون الهوية الثانوي"
-              required
-              isEnglish
-              intialValue={data.secondary_color}
-            />
-          </div>
+          {step == 4 && (
+            <>
+              <TextInput
+                name="address"
+                label="وصف العنوان"
+                placeholder="الحي، الشارع"
+                required
+                tooltip="أدخل العنوان هنا"
+                intialValue={data.address}
+              />
 
-          <TextInput
-            name="address"
-            label="وصف العنوان"
-            placeholder="الحي، الشارع"
-            required
-            tooltip="أدخل العنوان هنا"
-            intialValue={data.address}
-          />
+              <TextInput
+                name="googleMapsLink"
+                label="رابط خرائط جوجل"
+                placeholder="رابط خرائط جوجل"
+                tooltip="أدخل رابط خرائط جوجل هنا"
+                type="url"
+                required
+                intialValue={data.googleMapsLink}
+                isEnglish
+              />
 
-          <TextInput
-            name="googleMapsLink"
-            label="رابط خرائط جوجل"
-            placeholder="رابط خرائط جوجل"
-            tooltip="أدخل رابط خرائط جوجل هنا"
-            type="url"
-            required
-            intialValue={data.googleMapsLink}
-            isEnglish
-          />
+              <TextInput
+                name="phone"
+                label="رقم التواصل"
+                placeholder="رقم التواصل"
+                tooltip="أدخل رقم التواصل هنا"
+                type="tel"
+                intialValue={data.phone}
+                isEnglish
+              />
 
-          <TextInput
-            name="phone"
-            label="رقم التواصل"
-            placeholder="رقم التواصل"
-            tooltip="أدخل رقم التواصل هنا"
-            type="tel"
-            intialValue={data.phone}
-            isEnglish
-          />
+              <TextInput
+                name="whatsapp"
+                label="رابط الواتس اب"
+                placeholder="رابط الواتس اب"
+                tooltip="أدخل رابط الواتس اب هنا"
+                type="url"
+                intialValue={data.whatsapp}
+                isEnglish
+              />
 
-          <TextInput
-            name="whatsapp"
-            label="رابط الواتس اب"
-            placeholder="رابط الواتس اب"
-            tooltip="أدخل رابط الواتس اب هنا"
-            type="url"
-            intialValue={data.whatsapp}
-            isEnglish
-          />
+              <TextInput
+                name="instagram"
+                label="رابط الانستقرام"
+                placeholder="رابط الانستقرام"
+                tooltip="أدخل رابط الانستقرام هنا"
+                type="url"
+                intialValue={data.instagram}
+                isEnglish
+              />
 
-          <TextInput
-            name="instagram"
-            label="رابط الانستقرام"
-            placeholder="رابط الانستقرام"
-            tooltip="أدخل رابط الانستقرام هنا"
-            type="url"
-            intialValue={data.instagram}
-            isEnglish
-          />
+              <TextInput
+                name="snapchat"
+                label="رابط سناب شات"
+                placeholder="رابط سناب شات"
+                tooltip="أدخل رابط سناب شات هنا"
+                type="url"
+                intialValue={data.snapchat}
+                isEnglish
+              />
 
-          <TextInput
-            name="snapchat"
-            label="رابط سناب شات"
-            placeholder="رابط سناب شات"
-            tooltip="أدخل رابط سناب شات هنا"
-            type="url"
-            intialValue={data.snapchat}
-            isEnglish
-          />
-
-          <TextInput
-            name="tiktok"
-            label="رابط تيك توك"
-            placeholder="رابط تيك توك"
-            tooltip="أدخل رابط تيك توك هنا"
-            type="url"
-            intialValue={data.tiktok}
-            isEnglish
-          />
-
+              <TextInput
+                name="tiktok"
+                label="رابط تيك توك"
+                placeholder="رابط تيك توك"
+                tooltip="أدخل رابط تيك توك هنا"
+                type="url"
+                intialValue={data.tiktok}
+                isEnglish
+              />
+            </>
+          )}
         </div>
 
         <div className="mt-3 flex items-center justify-between gap-4 px-4 [&>*]:flex-grow">
@@ -212,10 +249,17 @@ export default function EditBusinessModal({
             type="submit"
             className="h-14 rounded-xl bg-primary p-2 font-bold text-white"
           >
-            تحديث
+            حفظ
           </button>
         </div>
       </form>
     </Modal>
   );
 }
+
+const stepNames = {
+  1: "المظهر",
+  2: "العناوين",
+  3: "الروابط",
+  4: "معرض الصور",
+};
