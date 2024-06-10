@@ -41,6 +41,7 @@ const MultiSelectInput = ({
       </div>
       <Select
         className="text-sm font-semibold text-textGray placeholder:text-placeholder"
+        required={required}
         options={selectOptions}
         value={value}
         isMulti

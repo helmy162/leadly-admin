@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 const WorkingHoursInput = ({
   name,
   label,
+  required = false,
   intialValue,
   onChange,
 }: {
@@ -51,6 +52,7 @@ const WorkingHoursInput = ({
               className={`bg-transparent text-sm font-semibold ${from == "" ? "text-placeholder" : "text-textGray"} !outline-none`}
               value={from}
               onChange={(e) => setFrom(e.target.value)}
+              required={required}
             >
               <option value="" disabled>
                 الساعة
@@ -73,6 +75,7 @@ const WorkingHoursInput = ({
               className={`bg-transparent text-sm font-semibold ${to == "" ? "text-placeholder" : "text-textGray"} !outline-none`}
               value={to}
               onChange={(e) => setTo(e.target.value)}
+              required={required}
             >
               <option value="" disabled>
                 الساعة

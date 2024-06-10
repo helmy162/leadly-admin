@@ -33,6 +33,7 @@ const TextInput = ({
       value={value}
       onChange={(e) => setValue(e.target.value)}
       placeholder={placeholder}
+      required={required}
       {...rest}
     />
   ) : (
@@ -44,6 +45,7 @@ const TextInput = ({
       value={value}
       onChange={(e) => setValue(e.target.value)}
       placeholder={placeholder}
+      required={required}
       {...rest}
     />
   );

@@ -34,6 +34,7 @@ const SelectInput = ({
           className={`bg-transparent text-sm font-semibold ${value=="" ? "text-placeholder" : "text-textGray"} !outline-none`}
           value={value}
           onChange={(e) => setValue(e.target.value)}
+          required={required}
         >
           {placeholder && (
             <option value="" disabled >
