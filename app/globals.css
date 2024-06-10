@@ -76,3 +76,88 @@ input[type="color"] {
 input[type="color"]::-webkit-color-swatch {
   border-radius: 4px;
 }
+
+/* Calendar */
+.react-calendar {
+  font-family: inherit !important;
+  @apply !w-full !border-none;
+}
+.react-calendar__navigation__arrow {
+  @apply flex items-center justify-center;
+}
+
+.react-calendar__navigation__arrow:focus {
+  @apply !bg-transparent !outline-none;
+}
+.react-calendar__navigation__prev2-button,
+.react-calendar__navigation__next2-button {
+  display: none;
+}
+.react-calendar__month-view__weekdays {
+  @apply !border-b !border-[##F3F2F8] !pb-2;
+}
+
+.react-calendar__month-view__days {
+  @apply !gap-y-1  !pt-2;
+}
+.react-calendar abbr[title] {
+  @apply text-sm font-normal no-underline;
+}
+.react-calendar__month-view__weekdays__weekday {
+  @apply !flex !aspect-square !items-center !justify-center;
+}
+.react-calendar__month-view__weekdays__weekday--weekend {
+  @apply text-[#FF3B30];
+}
+
+.react-calendar__month-view__days__day--weekend,
+.react-calendar__month-view__days__day {
+  @apply !text-sm !font-medium !text-black;
+}
+
+.react-calendar__month-view__days__day--neighboringMonth {
+  @apply !text-[#8E8E93];
+}
+
+.react-calendar__tile {
+  @apply !aspect-square !rounded-full !p-0;
+}
+
+.react-calendar__tile--now {
+  @apply !bg-primary !text-white !border-primary;
+}
+
+.react-calendar__tile--active {
+  @apply !bg-[#F3F2F8] !text-black;
+}
+
+.react-calendar__tile--rangeStart,
+.react-calendar__tile--rangeEnd {
+  @apply !bg-black !text-white;
+}
+
+.react-calendar__navigation__label {
+  @apply !text-xl !font-medium !text-black;
+}
+
+.react-calendar__year-view__months,
+.react-calendar__decade-view__years {
+  @apply !grid sm:grid-cols-4 grid-cols-3 !gap-2;
+}
+.react-calendar__decade-view__years {
+  @apply !grid-cols-5;
+}
+
+.react-calendar__year-view__months__month,
+.react-calendar__decade-view__years__year {
+  @apply !border !border-solid !border-black !text-sm;
+}
+
+.react-calendar__decade-view__years__year {
+  @apply !text-xs !font-medium;
+}
+
+
+.react-calendar__tile--hasActive{
+  @apply !bg-black !text-white;
+}

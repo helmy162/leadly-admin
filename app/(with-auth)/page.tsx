@@ -12,11 +12,16 @@ import FilterMenu from "@/components/FilterMenu";
 import { employees } from "@/mockups/employees";
 // import { services } from "@/mockups/services";
 import { statuses } from "@/mockups/statuses";
+import CalendarModal, { RangeDate } from "@/sections/CalendarModal";
+import CloseIcon from "@/components/icons/CloseIcon";
+import ChevronDown from "@/components/icons/ChevronDown";
 
 export default function Home() {
-  const [day, setDay] = useState<string | null>(null);
+  // const [day, setDay] = useState<string | null>(null);
+  const [range, setRange] = useState<RangeDate>([null, null]);
   const [reserveModalOpen, setReserveModalOpen] = useState(false);
   const [confirmModal, setConfirmModal] = useState(false);
+  const [calendarModal, setCalendarModal] = useState(false);
 
   const [employeesFilter, setEmployeesFilter] = useState<string>("");
   // const [servicesFilter, setServicesFilter] = useState<string>("");
@@ -27,15 +32,26 @@ export default function Home() {
 
   useEffect(() => {
     const date = new Date();
-    const todayValue = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
-    setDay(todayValue);
+    setRange([date, date]);
   }, []);
 
   useEffect(() => {
     let filtered = appointments;
 
-    if (day) {
-      filtered = filtered.filter((appointment) => appointment.date === day);
+    if (range[0] && range[1]) {
+      filtered = filtered.filter((appointment) => {
+        // check if it's on the same day of the start date or the end date. Or it's between them
+        const appointmentDate = new Date(appointment.date);
+        const startDate = range[0]
+        const endDate = range[1]
+
+        return (
+          appointmentDate.toDateString() == startDate?.toDateString() ||
+          appointmentDate.toDateString() == endDate?.toDateString() ||
+          (appointmentDate > startDate! && appointmentDate < endDate!)
+        );
+        
+      });
     }
 
     if (employeesFilter) {
@@ -58,23 +74,45 @@ export default function Home() {
       );
     }
 
+    filtered.sort((a, b) => {
+      const aDate = (new Date(a.date)).getTime();
+      const bDate = new Date(b.date).getTime();
+      return aDate - bDate;
+    });
+
     setFilteredAppointments(filtered);
-  }, [day, employeesFilter, statusFilter]);
+  }, [employeesFilter, statusFilter, range]);
 
   // get today's date
-  const fullDate = new Date();
-  const todayDay = fullDate.toLocaleDateString("en-US", {
+  const fullTodayDate = new Date();
+  const todayDay = fullTodayDate.toLocaleDateString("en-US", {
     day: "numeric",
   });
-  const todayMonth = fullDate.toLocaleDateString("en-US", {
+  const todayMonth = fullTodayDate.toLocaleDateString("en-US", {
     month: "long",
   });
-  const todayYear = fullDate.toLocaleDateString("en-US", {
+  const todayYear = fullTodayDate.toLocaleDateString("en-US", {
     year: "numeric",
   });
   const today = `${todayDay} ${todayMonth}, ${todayYear}`;
 
   const hasAppointments = filteredAppointments.length > 0;
+
+  // DD Month, YYYY formating
+  const startDay = range[0]
+    ? `${range[0].getDate()} ${range[0].toLocaleDateString("en-US", {
+        month: "long",
+      })}, ${range[0].getFullYear()}`
+    : null;
+  const endDay = range[1]
+    ? `${range[1].getDate()} ${range[1].toLocaleDateString("en-US", {
+        month: "long",
+      })}, ${range[1].getFullYear()}`
+    : null;
+
+  const isToday = startDay
+    ? startDay == today && (endDay == today || !endDay)
+    : true;
 
   return (
     <main className="flex h-full w-full flex-grow flex-col gap-4 pb-10 text-primary">
@@ -82,13 +120,38 @@ export default function Home() {
         <div className="flex flex-col gap-1">
           <h2 className="text-2xl font-bold text-black">أهلًا سلطان</h2>
           <h2 className="text-xs text-textGray">لديك اليوم ٥ حجوزات</h2>
-          <h2
-            className={`${english_font.className} text-right font-bold text-black`}
-          >
-            <bdi>
-              {today} <span className={arabic_font.className}>اليوم</span>
-            </bdi>
-          </h2>
+          <div className="flex items-center gap-2">
+            <button
+              className={`${english_font.className} text-right font-bold text-black`}
+              onClick={() => setCalendarModal(true)}
+            >
+              {isToday ? (
+                <bdi>
+                  {today} <span className={arabic_font.className}>اليوم</span>
+                </bdi>
+              ) : (
+                <>
+                  <h2 className={arabic_font.className}>الفترة</h2>
+                  <bdi>
+                    {startDay} - {endDay}
+                    <span className={arabic_font.className}></span>
+                  </bdi>
+                </>
+              )}
+            </button>
+            {isToday ? (
+              <button onClick={() => setCalendarModal(true)}>
+                <ChevronDown className="relative bottom-[4px] text-black" />
+              </button>
+            ) : (
+              <button
+                className="self-end"
+                onClick={() => setRange([fullTodayDate, fullTodayDate])}
+              >
+                <CloseIcon className="text-[#D00000]" />
+              </button>
+            )}
+          </div>
         </div>
         <button
           type="button"
@@ -100,7 +163,7 @@ export default function Home() {
         </button>
       </div>
 
-      <DaysFilter day={day} setDay={setDay} />
+      {/* <DaysFilter day={startDay} setDay={setStartDay} /> */}
 
       <div className="flex gap-5">
         <FilterMenu
@@ -135,6 +198,13 @@ export default function Home() {
         open={confirmModal}
         setOpen={setConfirmModal}
         title="تمت إضافة الحجز بنجاح"
+      />
+
+      <CalendarModal
+        open={calendarModal}
+        setOpen={setCalendarModal}
+        range={range}
+        setRange={setRange}
       />
     </main>
   );
