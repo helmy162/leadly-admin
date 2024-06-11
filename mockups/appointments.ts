@@ -1,5 +1,3 @@
-import { employees } from "./employees";
-
 export const appointments = [
   {
     id: 1,
@@ -10,6 +8,7 @@ export const appointments = [
     phoneNumber: "0551234567",
     employees: ["محمد", "علي"],
     status: "confirmed",
+    price: 53,
   },
   {
     id: 2,
@@ -19,7 +18,8 @@ export const appointments = [
     date: "6/11/2024",
     phoneNumber: "0552345678",
     employees: ["عمر", "عبدالله"],
-    status: "pending",
+    status: "no_show",
+    price: 114,
   },
   {
     id: 3,
@@ -30,6 +30,7 @@ export const appointments = [
     phoneNumber: "0553456789",
     employees: ["محمد", "علي"],
     status: "confirmed",
+    price: 156,
   },
   {
     id: 4,
@@ -40,6 +41,7 @@ export const appointments = [
     phoneNumber: "0554567890",
     employees: ["عمر", "عبدالله"],
     status: "cancelled",
+    price: 100,
   },
   {
     id: 5,
@@ -49,7 +51,8 @@ export const appointments = [
     date: "6/10/2024",
     phoneNumber: "0555678901",
     employees: ["محمد", "علي"],
-    status: "pending",
+    status: "completed",
+    price: 149,
   },
   {
     id: 6,
@@ -60,6 +63,7 @@ export const appointments = [
     phoneNumber: "0556789012",
     employees: ["عمر", "عبدالله"],
     status: "confirmed",
+    price: 126,
   },
   {
     id: 7,
@@ -69,7 +73,8 @@ export const appointments = [
     date: "6/12/2024",
     phoneNumber: "0557890123",
     employees: ["محمد", "علي"],
-    status: "pending",
+    status: "completed",
+    price: 69,
   },
   {
     id: 8,
@@ -80,6 +85,7 @@ export const appointments = [
     phoneNumber: "0558901234",
     employees: ["عمر", "عبدالله"],
     status: "confirmed",
+    price: 115,
   },
   {
     id: 9,
@@ -89,7 +95,8 @@ export const appointments = [
     date: "6/14/2024",
     phoneNumber: "0559012345",
     employees: ["محمد", "علي"],
-    status: "pending",
+    status: "no_show",
+    price: 104,
   },
   {
     id: 10,
@@ -100,6 +107,7 @@ export const appointments = [
     phoneNumber: "0560123456",
     employees: ["عمر", "عبدالله"],
     status: "confirmed",
+    price: 180,
   },
   {
     id: 11,
@@ -109,7 +117,8 @@ export const appointments = [
     date: "6/17/2024",
     phoneNumber: "0561234567",
     employees: ["محمد", "علي"],
-    status: "pending",
+    status: "no_show",
+    price: 69,
   },
   {
     id: 12,
@@ -118,7 +127,9 @@ export const appointments = [
     time: "8am",
     date: "6/10/2024",
     phoneNumber: "0562345678",
+    employees: ["عمر", "عبدالله"],
     status: "confirmed",
+    price: 183,
   },
   {
     id: 13,
@@ -128,7 +139,8 @@ export const appointments = [
     date: "6/13/2024",
     phoneNumber: "0563456789",
     employees: ["عمر", "عبدالله"],
-    status: "pending",
+    status: "completed",
+    price: 177,
   },
   {
     id: 14,
@@ -139,6 +151,7 @@ export const appointments = [
     phoneNumber: "0564567890",
     employees: ["محمد", "علي"],
     status: "confirmed",
+    price: 58,
   },
   {
     id: 15,
@@ -148,7 +161,8 @@ export const appointments = [
     date: "6/14/2024",
     phoneNumber: "0565678901",
     employees: ["عمر", "عبدالله"],
-    status: "pending",
+    status: "completed",
+    price: 189,
   },
   {
     id: 16,
@@ -159,6 +173,7 @@ export const appointments = [
     phoneNumber: "0566789012",
     employees: ["محمد", "علي"],
     status: "confirmed",
+    price: 80,
   },
   {
     id: 17,
@@ -168,7 +183,8 @@ export const appointments = [
     date: "6/12/2024",
     phoneNumber: "0567890123",
     employees: ["عمر", "عبدالله"],
-    status: "pending",
+    status: "completed",
+    price: 137,
   },
   {
     id: 18,
@@ -179,6 +195,7 @@ export const appointments = [
     phoneNumber: "0568901234",
     employees: ["محمد", "علي"],
     status: "confirmed",
+    price: 53,
   },
   {
     id: 19,
@@ -188,7 +205,8 @@ export const appointments = [
     date: "6/17/2024",
     phoneNumber: "0569012345",
     employees: ["عمر", "عبدالله"],
-    status: "pending",
+    status: "completed",
+    price: 192,
   },
   {
     id: 20,
@@ -199,5 +217,6 @@ export const appointments = [
     phoneNumber: "0570123456",
     employees: ["محمد", "علي"],
     status: "confirmed",
+    price: 55,
   },
 ];

@@ -7,12 +7,18 @@ export const statuses= [
     },
     {
         id: 2,
-        name: "قيد الانتظار",
-        value: "pending",
-        color: "#FFA500",
+        name: "مكتمل",
+        value: "completed",
+        color: "#407BFF",
     },
     {
         id: 3,
+        name: "لم يحضر",
+        value: "no_show",
+        color: "#64748B",
+    },
+    {
+        id: 4,
         name: "ملغي",
         value: "cancelled",
         color: "#BE0505",

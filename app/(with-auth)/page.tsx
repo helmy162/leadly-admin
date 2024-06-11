@@ -73,6 +73,7 @@ export default function Home() {
       );
     }
 
+    // sort by appointment date
     filtered.sort((a, b) => {
       const aDate = new Date(a.date).getTime();
       const bDate = new Date(b.date).getTime();

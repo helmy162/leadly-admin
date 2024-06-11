@@ -14,6 +14,8 @@ export default function Appointment({
     date: string;
     time: string;
     status: string;
+    employees: string[];
+    price: number;
   };
   onEdit: () => void;
   onDelete: () => void;
@@ -56,6 +58,24 @@ export default function Appointment({
             className={`${english_font.className} text-xs font-semibold text-black`}
           >
             {data.time}
+          </h5>
+        </div>
+        <div className="flex items-center justify-between">
+          <h4 className="text-xs font-medium text-textGray">السعر </h4>
+          <h5
+            className={`${english_font.className} text-xs font-semibold text-black`}
+          >
+            <bdi>
+            {data.price} SAR
+            </bdi>
+          </h5>
+        </div>
+        <div className="flex items-center justify-between">
+          <h4 className="text-xs font-medium text-textGray">مقدم الخدمة </h4>
+          <h5
+            className={`text-xs font-semibold text-black`}
+          >
+            {data.employees.join(", ")}
           </h5>
         </div>
       </div>
