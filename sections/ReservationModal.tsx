@@ -96,12 +96,12 @@ export default function ReservationModal({
           tooltip="اختر الخدمات المناسبة للمستخدم"
         />
         <MultiSelectInput
-          name="doctor"
-          label="الدكتور"
+          name="practitioner"
+          label="مقدم الخدمة"
           options={employees}
           value={selectedEmployees}
           setValue={setSelectedEmployees}
-          tooltip="اختر الدكاترة المختصين بالخدمة"
+          tooltip="اختر مقدمين الخدمة المختصين"
         />
         <TextInput
           name="name"
