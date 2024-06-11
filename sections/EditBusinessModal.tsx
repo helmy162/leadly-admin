@@ -197,6 +197,7 @@ export default function EditBusinessModal({
                 placeholder="رقم التواصل"
                 tooltip="أدخل رقم التواصل هنا"
                 type="tel"
+                required
                 intialValue={data.phone}
                 isEnglish
               />
