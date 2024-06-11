@@ -214,9 +214,9 @@ function Step2({
   show: boolean;
 }) {
   return (
-    <div className="flex flex-col gap-4">
+    <div className={`${show ? "flex" : "hidden"} flex-col gap-4`}>
       <h2 className="text-base font-bold">أضف جدول العمل لهذه الخدمة</h2>
-      <div className={`${show ? "flex" : "hidden"} flex-col gap-6`}>
+      <div className="flex flex-col gap-6">
         {days.map((day) => (
           <WorkingHoursInput
             key={day.value}
@@ -251,8 +251,8 @@ function Step3({
         onClick={() => setHasDefinedPractitioner(true)}
       >
         <AccountIcon
-          width={16}
-          height={24}
+          width={32}
+          height={32}
           className={!hasDefinedPractitioner ? "" : "text-primary"}
         />
         <p className="text-lg font-medium text-black">خدمة محددة الممارسين</p>
