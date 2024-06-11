@@ -2,7 +2,7 @@ export const services = [
   {
     id: 1,
     name: "منكير كلاسيك",
-    categories: ["أظافر"],
+    categories: ["العناية بالأظافر"],
     price: 100,
     oldPrice: 150,
     description: "منكير كلاسيك لتحسين مظهر الأظافر وإضافة لون جميل.",
@@ -26,7 +26,7 @@ export const services = [
   {
     id: 2,
     name: "لون عادي",
-    categories: ["أظافر"],
+    categories: ["العناية بالأظافر"],
     price: 50,
     oldPrice: 80,
     description: "لون عادي للأظافر لإضفاء لمسة نهائية أنيقة.",
@@ -50,7 +50,7 @@ export const services = [
   {
     id: 3,
     name: "بديكير",
-    categories: ["أظافر"],
+    categories: ["العناية بالأظافر"],
     price: 150,
     oldPrice: 200,
     description: "بديكير للعناية بالقدمين وتنعيم البشرة.",
@@ -74,7 +74,7 @@ export const services = [
   {
     id: 4,
     name: "علاج القدم",
-    categories: ["أظافر"],
+    categories: ["العناية بالأظافر"],
     price: 120,
     oldPrice: 180,
     description: "علاج القدم للتخلص من الجلد الميت وتنعيم البشرة.",
@@ -98,7 +98,7 @@ export const services = [
   {
     id: 5,
     name: "قص الشعر",
-    categories: ["شعر"],
+    categories: ["العناية بالشعر"],
     price: 200,
     oldPrice: 300,
     description: "قص الشعر لتحسين مظهر الشعر وإضفاء تسريحة جديدة.",
@@ -122,7 +122,7 @@ export const services = [
   {
     id: 6,
     name: "تصفيف الشعر",
-    categories: ["شعر"],
+    categories: ["العناية بالشعر"],
     price: 150,
     oldPrice: 250,
     description: "تصفيف الشعر لإعطاء مظهر نهائي أنيق وجذاب.",
@@ -146,7 +146,7 @@ export const services = [
   {
     id: 7,
     name: "تنظيف الوجه",
-    categories: ["عناية بالبشرة"],
+    categories: ["العناية بالبشرة"],
     price: 250,
     oldPrice: 400,
     description: "تنظيف الوجه لإزالة الشوائب والبثور وتحسين نضارة البشرة.",
@@ -170,7 +170,7 @@ export const services = [
   {
     id: 8,
     name: "ماسك",
-    categories: ["عناية بالبشرة"],
+    categories: ["العناية بالبشرة"],
     price: 100,
     oldPrice: 150,
     description: "ماسك للوجه لترطيب وتغذية البشرة.",
@@ -194,7 +194,7 @@ export const services = [
   {
     id: 9,
     name: "تلوين شعر",
-    categories: ["شعر"],
+    categories: ["العناية بالشعر"],
     price: 300,
     oldPrice: 500,
     description: "تلوين شعر باستخدام أحدث تقنيات الصبغ للحصول على لون مثالي.",
@@ -218,7 +218,7 @@ export const services = [
   {
     id: 10,
     name: "علاج الكيراتين",
-    categories: ["شعر"],
+    categories: ["العناية بالشعر"],
     price: 500,
     oldPrice: 800,
     description: "علاج الكيراتين لتنعيم الشعر وإصلاح التلف.",
